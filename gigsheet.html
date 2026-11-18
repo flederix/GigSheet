@@ -460,11 +460,35 @@ body.notools .bgh .tcol{animation-name:tnudge2}
 .gbar .grow2{order:10;flex:1 0 100%;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
 .gbar .gic{width:46px;height:46px;min-height:46px;padding:0;display:inline-flex;align-items:center;justify-content:center}
 .gbar .gic[hidden]{display:none}
+#side{z-index:4;background:color-mix(in srgb,var(--surface) 90%,var(--ink));border-right:1px solid color-mix(in srgb,var(--line) 70%,var(--ink));box-shadow:8px 0 28px rgba(0,0,0,.34)}
+:root[data-theme=light] #side{box-shadow:8px 0 26px rgba(38,51,47,.14)}
+@media (prefers-color-scheme:light){:root:not([data-theme=dark]) #side{box-shadow:8px 0 26px rgba(38,51,47,.14)}}
+.tcol,.ops>.tcol,#inp>.tcol,#sheetv .tcol,#setv .tcol,#gigv .tcol{width:28px!important;height:28px!important}
+:root[data-theme=light] #side{background:color-mix(in srgb,var(--surface) 80%,var(--ink));border-right-color:color-mix(in srgb,var(--line) 50%,var(--ink))}
+@media (prefers-color-scheme:light){:root:not([data-theme=dark]) #side{background:color-mix(in srgb,var(--surface) 80%,var(--ink));border-right-color:color-mix(in srgb,var(--line) 50%,var(--ink))}}
+#side{--sbg:color-mix(in srgb,var(--surface) 90%,var(--ink))}
+:root[data-theme=light] #side{--sbg:color-mix(in srgb,var(--surface) 80%,var(--ink))}
+@media (prefers-color-scheme:light){:root:not([data-theme=dark]) #side{--sbg:color-mix(in srgb,var(--surface) 80%,var(--ink))}}
+#side #bkw{background:var(--sbg)}
+#side #bkw details.bk{background:transparent}
+#side #bkw .row>button:not(#brep):not(.go){background:color-mix(in srgb,var(--sbg) 78%,var(--bg))}
+#ver{padding:6px 2px 0;font-size:.68rem;color:var(--muted);letter-spacing:.02em;opacity:.85;user-select:text}
+#side #ver{text-align:right;padding:18px 4px 0}
+.tabs{position:relative;gap:10px!important}
+.tabs button{position:relative;z-index:1}
+.tabs button[aria-pressed="true"],.tabs button[aria-pressed="true"]:hover{background:transparent!important;box-shadow:none!important;color:var(--onacc)!important}
+#tabind{position:absolute;left:0;top:0;z-index:0;border-radius:999px;background:var(--chord);box-shadow:0 1px 8px rgba(0,0,0,.28);transition:transform .32s cubic-bezier(.4,0,.2,1),width .32s cubic-bezier(.4,0,.2,1);pointer-events:none}
+.slr{animation:slr .3s cubic-bezier(.2,.7,.2,1)}.sll{animation:sll .3s cubic-bezier(.2,.7,.2,1)}
+@keyframes slr{from{opacity:0;transform:translateX(34px)}to{opacity:1;transform:none}}
+@keyframes sll{from{opacity:0;transform:translateX(-34px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){#tabind{transition:none}}
+.imp>.ih{color:var(--ink);font-size:.98rem;font-weight:700}.imp>.ih span{margin-left:8px;color:var(--muted);font-size:.8rem;font-weight:400}
+body.notools #impbox{display:none!important}
 </style>
 </head>
 <body>
 <div class="app"><aside id="side" aria-label="Bibliothek"><h2>Bibliothek</h2><div class="row"><button class="go" id="dnew">+ Song</button><button id="dfold">+ Ordner</button></div><div class="row"><input id="lq" placeholder="Suchen…" aria-label="Bibliothek durchsuchen" style="flex:1;min-width:0"><select id="lsort" hidden aria-label="Sortierung"><option value="manual">Eigene</option><option value="name-desc">Name Z–A</option><option value="name">Name</option><option value="recent">Zuletzt</option></select><div class="seg" id="lseg" role="group" aria-label="Sortierung"></div></div>
-<div id="lib"></div><div id="bkw"><details class="bk" id="bkd"><summary>Sichern</summary><div class="row"><button id="bsong" title="Den aktuellen Song als Datei speichern">Song</button><button id="bfold" title="Den Ordner des aktuellen Songs mit allen Songs als Datei speichern">Ordner</button><button id="blib" title="Die gesamte Bibliothek mit allen Ordnern als Datei speichern">Bibliothek</button></div><p class="hint" id="smsg">Speichert Song, Ordner oder die ganze Bibliothek als Datei.</p></details><details class="bk" id="bimd"><summary>Importieren</summary><div class="row"><button id="bimp" title="Eine gesicherte Datei einlesen">Datei wählen</button></div><input type="file" id="bfile" accept=".json,application/json" hidden><div id="bchoice" class="row" hidden><button class="go" id="badd">Hinzufügen</button><button id="brep" title="Achtung: ersetzt die gesamte Bibliothek in diesem Browser">Alles ersetzen</button><button id="bcan" aria-label="Abbrechen" title="Abbrechen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><p class="hint" id="bmsg">Liest eine mit „Sichern“ gespeicherte Datei ein.</p></details></div></aside><div id="rz" role="separator" aria-orientation="vertical" aria-label="Breite der Bibliothek ändern" tabindex="0" title="Ziehen, um die Breite zu ändern (Doppelklick: zurücksetzen)"></div>
+<div id="lib"></div><div id="bkw"><details class="bk" id="bkd"><summary>Sichern</summary><div class="row"><button id="bsong" title="Den aktuellen Song als Datei speichern">Song</button><button id="bfold" title="Den Ordner des aktuellen Songs mit allen Songs als Datei speichern">Ordner</button><button id="blib" title="Die gesamte Bibliothek mit allen Ordnern als Datei speichern">Bibliothek</button></div><p class="hint" id="smsg">Speichert Song, Ordner oder die ganze Bibliothek als Datei.</p></details><details class="bk" id="bimd"><summary>Importieren</summary><div class="row"><button id="bimp" title="Eine gesicherte Datei einlesen">Datei wählen</button></div><input type="file" id="bfile" accept=".json,application/json" hidden><div id="bchoice" class="row" hidden><button class="go" id="badd">Hinzufügen</button><button id="brep" title="Achtung: ersetzt die gesamte Bibliothek in diesem Browser">Alles ersetzen</button><button id="bcan" aria-label="Abbrechen" title="Abbrechen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><p class="hint" id="bmsg">Liest eine mit „Sichern“ gespeicherte Datei ein.</p></details><div id="ver" title="Programmversion"></div></div></aside><div id="rz" role="separator" aria-orientation="vertical" aria-label="Breite der Bibliothek ändern" tabindex="0" title="Ziehen, um die Breite zu ändern (Doppelklick: zurücksetzen)"></div>
 <main>
 <div class="top"><div class="hrow"><button id="sidebtn" aria-label="Bibliothek ein- oder ausblenden" aria-expanded="true">☰</button><h1 class="brand"><svg class="logo" viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="112" fill="var(--bg)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="var(--chord)"><path d="M345 150A112 112 0 1 0 368 236H282" stroke-width="42"/><path d="M150 398H362" stroke-width="24"/></g></svg><span>Gig<b>Sheet</b></span></h1><span id="curname" class="curname"></span></div>
 <div class="tabs"><button id="tabT" aria-pressed="false">Text</button><button id="tabE" aria-pressed="true">Editor</button><button id="tabS" aria-pressed="false">Blatt (A4)</button><button id="tabL" aria-pressed="false">Setlist</button><button id="tabG" aria-pressed="false">Gig</button></div><div class="tright"><span id="sst" class="sst">Gespeichert</span><button id="tbtn" aria-label="Werkzeugleiste ein- oder ausblenden" aria-pressed="true" title="Werkzeugleiste ein-/ausblenden"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2.5" width="12" height="11" rx="2.5"/><path d="M2 6.5h12"/></svg></button><button id="thm" aria-label="Darstellung umschalten"></button></div></div>
@@ -472,10 +496,10 @@ body.notools .bgh .tcol{animation-name:tnudge2}
 <div id="inp">
 <div class="row tbar"><button id="tun" title="Rückgängig (Strg+Z)" aria-label="Text-Änderung rückgängig machen">↶</button><button id="tre" title="Wiederholen (Strg+Y)" aria-label="Text-Änderung wiederholen">↷</button><button id="tclr" class="mini" data-fd="" title="Löscht den gesamten Text und alle Akkorde dieses Songs">Alles löschen</button><span class="info" tabindex="0" role="button" aria-label="Hinweise zum Text-Reiter"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10.2"/><path d="M12 10.2v7M12 6.4v.2" stroke-width="2.6"/></svg><span class="tip" role="tooltip">Hier fügst du deinen Text ein und änderst ihn jederzeit. Änderungen gelten sofort im Editor und im Blatt, gesetzte Akkorde bleiben erhalten. Überschriften wie [Strophe 1] oder „Refrain:“ werden als Abschnitt erkannt. Ein Abschnitt ohne Text (z. B. ein zweiter „Refrain“) wird im Blatt automatisch mit Text und Akkorden des ersten gefüllt.</span></span></div>
 <button class="tcol" type="button" aria-label="Werkzeuge ein- oder ausklappen" title="Werkzeuge ein-/ausklappen"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l5-5 5 5"/></svg></button>
-<details class="help imp" open><summary>Text mit Akkorden einlesen <span>Ultimate Guitar, ChordPro · wird hinten angefügt</span></summary><textarea id="ugsrc" placeholder="Akkorde über dem Text einfügen, z. B.
+<div class="help imp" id="impbox"><div class="ih">Text mit Akkorden einlesen <span>Ultimate Guitar, ChordPro · wird hinten angefügt</span></div><textarea id="ugsrc" placeholder="Akkorde über dem Text einfügen, z. B.
 [Verse 1]
 Am        F
-Hello darkness my old friend"></textarea><div class="row"><button class="go" id="ugdo">Einlesen</button><span class="hint" id="ugmsg"></span></div></details>
+Hello darkness my old friend"></textarea><div class="row"><button class="go" id="ugdo">Einlesen</button><span class="hint" id="ugmsg"></span></div></div>
 <textarea id="src" placeholder="Lyrics hier einfügen. Zeilen wie [Strophe 1] oder „Refrain:“ werden als Abschnitt erkannt."></textarea>
 
 </div>
@@ -635,7 +659,9 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu){menu=null;ren
 function arm(id,fn){if(armDel===id){armDel=null;fn()}else{armDel=id;renderLib();setTimeout(()=>{if(armDel===id){armDel=null;renderLib()}},3000)}}
 function commitRen(ok){const e=$('lib').querySelector('.rn');if(!e||ren===null)return;const id=ren;ren=null;if(ok){const v=e.value.trim(),o=lib.docs.find(d=>d.id===id)||lib.folders.find(f=>f.id===id);if(o&&v){o.name=v;if(lib.docs.includes(o))syncTitle(o,v)}wr(LK,lib)}renderLib()}
 function setSide(o){document.body.classList.toggle('noside',!o);$('sidebtn').setAttribute('aria-expanded',o);try{localStorage.setItem('cs_side',o?'1':'0')}catch(e){}}
+const APP_VERSION='96',APP_DATE='18.11.2026';
 function curFolder(){const a=lib&&lib.docs.find(d=>d.id===lib.active);return a&&a.folder&&lib.folders.some(f=>f.id===a.folder)?a.folder:null}
+
 function tabGate(){const b=$('tabL');if(!b)return;const ok=!!curFolder();b.classList.toggle('dis',!ok);b.setAttribute('aria-disabled',ok?'false':'true');b.title=ok?'':'Diese Funktion ist erst verfügbar, wenn ein Song in einem Ordner liegt.';if(!ok&&view==='set')show('edit')}
 function renderLib(){if(!lib)return;tabGate();{const a=lib.docs.find(d=>d.id===lib.active);$('curname').textContent=a?a.name:''}
 const dr=d=>{const on=d.id===lib.active;let h=`<div class="di${on?' on':''}" data-did="${d.id}"><span class="dh" data-dg="${d.id}" title="Ziehen: in einen Ordner oder an eine andere Position">⋮⋮</span>`+(ren===d.id?`<input class="rn" value="${esc(d.name)}" aria-label="Name">`:`<button class="dn" data-o="${d.id}">${esc(d.name)}</button><button class="mini dm" data-dm="${d.id}" aria-label="Aktionen für dieses Dokument" aria-haspopup="menu" aria-expanded="${menu===d.id}">⋯</button>`);
@@ -1081,7 +1107,12 @@ document.querySelectorAll('#pb .ln2').forEach(ln=>{const rows={};
 ln.querySelectorAll('.sg>.cn').forEach(c=>{const r=c.parentNode.getBoundingClientRect(),k=Math.round(r.top);(rows[k]=rows[k]||[]).push([c,r.left,c.getBoundingClientRect().width])});
 const gap=parseFloat(getComputedStyle(ln).fontSize)*0.35*sc;
 Object.values(rows).forEach(a=>{a.sort((p,q)=>p[1]-q[1]);let pr=-1e9;a.forEach(([c,l,w])=>{const x=Math.max(l,pr+gap);if(x>l)c.style.left=((x-l)/sc)+'px';pr=x+w})})})}
-function show(v){if(view==='text'&&v!=='text'){tH=[];tR=[];tbtn()}view=v;$('textv').hidden=v!=='text';if(v==='text')$('src').value=st.lines.map(L=>L.t).join('\n');$('tabT').setAttribute('aria-pressed',v==='text');$('editv').hidden=v!=='edit';$('sheetv').hidden=v!=='sheet';$('tabE').setAttribute('aria-pressed',v==='edit');$('tabS').setAttribute('aria-pressed',v==='sheet');$('setv').hidden=v!=='set';$('tabL').setAttribute('aria-pressed',v==='set');$('gigv').hidden=v!=='gig';$('tabG').setAttribute('aria-pressed',v==='gig');if(v==='gig')gigEnter();else gigWake(false);if(v==='sheet')sheet();if(v==='set'){setlist(2);requestAnimationFrame(sscale)}}
+const VORD=['text','edit','sheet','set','gig'],VSEC={text:'textv',edit:'editv',sheet:'sheetv',set:'setv',gig:'gigv'},VTAB={text:'tabT',edit:'tabE',sheet:'tabS',set:'tabL',gig:'tabG'};
+function tabInd(first){const w=document.querySelector('.tabs');if(!w)return;let ind=$('tabind');if(!ind){ind=document.createElement('span');ind.id='tabind';w.prepend(ind)}
+const b=$(VTAB[view]);if(!b||!b.offsetWidth)return;if(first)ind.style.transition='none';ind.style.width=b.offsetWidth+'px';ind.style.height=b.offsetHeight+'px';ind.style.transform='translate('+b.offsetLeft+'px,'+b.offsetTop+'px)';if(first){void ind.offsetWidth;ind.style.transition=''}}
+function tabSlide(a,v){if(!a||a===v||matchMedia('(prefers-reduced-motion:reduce)').matches)return;const e=$(VSEC[v]);if(!e)return;const d=VORD.indexOf(v)>VORD.indexOf(a)?'slr':'sll';e.classList.remove('slr','sll');void e.offsetWidth;e.classList.add(d);e.addEventListener('animationend',()=>e.classList.remove('slr','sll'),{once:true})}
+addEventListener('resize',()=>tabInd(true));if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>tabInd(true));
+function show(v){const pv0=view;if(view==='text'&&v!=='text'){tH=[];tR=[];tbtn()}view=v;$('textv').hidden=v!=='text';if(v==='text')$('src').value=st.lines.map(L=>L.t).join('\n');$('tabT').setAttribute('aria-pressed',v==='text');$('editv').hidden=v!=='edit';$('sheetv').hidden=v!=='sheet';$('tabE').setAttribute('aria-pressed',v==='edit');$('tabS').setAttribute('aria-pressed',v==='sheet');$('setv').hidden=v!=='set';$('tabL').setAttribute('aria-pressed',v==='set');$('gigv').hidden=v!=='gig';$('tabG').setAttribute('aria-pressed',v==='gig');if(v==='gig')gigEnter();else gigWake(false);if(v==='sheet')sheet();if(v==='set'){setlist(2);requestAnimationFrame(sscale)}tabInd();tabSlide(pv0,v)}
 $('tabT').onclick=()=>show('text');$('tabE').onclick=()=>show('edit');$('tabL').onclick=()=>{if(curFolder())show('set');else toast('Setlist ist erst verfügbar, wenn der Song in einem Ordner liegt.')};$('tabG').onclick=()=>show('gig');$('tabS').onclick=()=>show('sheet');
 [...SIDS,...SCK,'fs'].forEach(i=>{$(i).addEventListener('input',onB);$(i).addEventListener('change',onB)});
 addEventListener('resize',()=>{if(view==='sheet')scale();if(view==='set')sscale();if(view==='gig')gigFix()});
@@ -1251,6 +1282,8 @@ else if(e.key==='PageUp'&&scrollY<=2){e.preventDefault();gigGo(-1)}});
 
 sLoad();
 restore();$('key').value=st.key;$('mode').value=st.minor;render();$('src').value=st.lines.map(L=>L.t).join('\n');ssInit();renderLib();{let s=null;try{s=localStorage.getItem('cs_side')}catch(e){}setSide(s==null?innerWidth>=900:s==='1')}show(st.lines.length?'edit':'text');
+try{const v=$('ver');if(v)v.textContent='GigSheet · Version '+APP_VERSION+' · '+APP_DATE}catch(e){}
+try{tabInd(true)}catch(e){}
 </script>
 </body>
 </html>
