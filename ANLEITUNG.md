@@ -1,26 +1,27 @@
-# Chord-Sheet-Maker online stellen (GitHub Pages) – Schritt für Schritt
+# GigSheet online stellen (GitHub Pages) – Schritt für Schritt
 
 Dateien in diesem Ordner:
-- index.html – die ganze App
+- gigsheet.html – die ganze App
+- index.html – kleine Weiterleitung auf gigsheet.html (damit die Adresse ohne Dateinamen funktioniert)
 - manifest.webmanifest, sw.js, icon-*.png, icon.svg – machen die App installierbar und offline-fähig
 
 ## A) Online stellen mit GitHub Pages (kostenlos, ca. 10 Minuten)
 
 1. Konto anlegen auf https://github.com (falls noch keins da ist).
-2. Oben rechts "+" → "New repository". Name z. B. `chord-sheet-maker`, "Public" wählen, "Create repository".
+2. Oben rechts "+" → "New repository". Name z. B. `gigsheet`, "Public" wählen, "Create repository".
    (Das Repository enthält nur die App, keine Songs. Deine Songs bleiben im Browser.)
 3. Auf der neuen Seite "uploading an existing file" anklicken.
-4. ALLE Dateien aus dem Ordner (index.html, manifest.webmanifest, sw.js, icon.svg, icon-180.png, icon-192.png, icon-512.png) in das Fenster ziehen und unten "Commit changes" klicken.
+4. ALLE Dateien aus dem Ordner (gigsheet.html, index.html, manifest.webmanifest, sw.js, icon.svg, icon-180.png, icon-192.png, icon-512.png) in das Fenster ziehen und unten "Commit changes" klicken.
 5. Oben "Settings" → links "Pages". Bei "Branch" `main` und `/ (root)` wählen → "Save".
 6. Nach 1–2 Minuten steht oben auf der Pages-Seite die Adresse:
-   `https://DEIN-NAME.github.io/chord-sheet-maker/`
+   `https://DEIN-NAME.github.io/gigsheet/`
    Diesen Link kannst du an Freunde schicken.
 
 Alternative ohne GitHub: auf https://app.netlify.com/drop den ganzen Ordner ins Fenster ziehen, fertig (Adresse wird sofort angezeigt).
 
 ## B) Als App installieren (Mac, Windows, iPad)
 
-- Mac/Windows mit Chrome oder Edge: Adresse öffnen → in der Adressleiste rechts das Symbol "Installieren" (oder Menü → "Chord-Sheet-Maker installieren"). Danach liegt die App im Startmenü bzw. Launchpad und öffnet sich in eigenem Fenster.
+- Mac/Windows mit Chrome oder Edge: Adresse öffnen → in der Adressleiste rechts das Symbol "Installieren" (oder Menü → "GigSheet installieren"). Danach liegt die App im Startmenü bzw. Launchpad und öffnet sich in eigenem Fenster.
 - iPad/iPhone mit Safari: Teilen-Symbol → "Zum Home-Bildschirm".
 - Safari am Mac (ab Version 17): Menü "Ablage" → "Zum Dock hinzufügen".
 
@@ -35,7 +36,7 @@ Wichtig: Beim allerersten Öffnen braucht die App einmal Internet. Dabei lädt s
 
 ## D) Updates einspielen
 
-Neue index.html (oder das ganze Paket) in dasselbe GitHub-Repository hochladen ("Add file" → "Upload files", gleiche Dateinamen werden ersetzt). Beim nächsten Öffnen mit Internet holt sich die App die neue Version. Falls nicht sofort: Seite einmal neu laden.
+Neue gigsheet.html (oder das ganze Paket) in dasselbe GitHub-Repository hochladen ("Add file" → "Upload files", gleiche Dateinamen werden ersetzt). Beim nächsten Öffnen mit Internet holt sich die App die neue Version. Falls nicht sofort: Seite einmal neu laden.
 
 ## E) Kurz geprüft / nicht geprüft
 

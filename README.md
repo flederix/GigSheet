@@ -1,4 +1,4 @@
-# Chord-Sheet-Maker
+# GigSheet
 
 🇬🇧 [English](#english) · 🇩🇪 [Deutsch](#deutsch)
 
@@ -29,7 +29,7 @@ To install: in Chrome/Edge click **Install** in the address bar; on iPad use **S
 Songs are stored only in your browser (local storage) on each device. Nothing is uploaded. Clearing site data deletes them, so use **Backup** in the sidebar regularly. To move songs to another device, back up there and use **Import** on the target.
 
 ### Run locally
-Download the repository (**Code → Download ZIP**) and open `index.html`. Installation and offline mode need the page to be served over `http(s)`, for example via GitHub Pages.
+Download the repository (**Code → Download ZIP**) and open `gigsheet.html`. Installation and offline mode need the page to be served over `http(s)`, for example via GitHub Pages.
 
 ### Built with
 Plain HTML, CSS and JavaScript in one file, [jsPDF](https://github.com/parallax/jsPDF) for PDF export and the Inter font from Google Fonts.
@@ -64,7 +64,7 @@ Installieren: In Chrome/Edge in der Adressleiste auf **Installieren** klicken, a
 Songs liegen nur im Browser (lokaler Speicher) des jeweiligen Geräts. Es wird nichts hochgeladen. Wer Website-Daten löscht, verliert sie, daher regelmäßig in der Seitenleiste **Sichern** nutzen. Songs auf ein anderes Gerät bringen: dort sichern, am Ziel **Import**.
 
 ### Lokal ausführen
-Repository herunterladen (**Code → Download ZIP**) und `index.html` öffnen. Installation und Offline-Modus brauchen eine Auslieferung über `http(s)`, zum Beispiel über GitHub Pages.
+Repository herunterladen (**Code → Download ZIP**) und `gigsheet.html` öffnen. Installation und Offline-Modus brauchen eine Auslieferung über `http(s)`, zum Beispiel über GitHub Pages.
 
 ### Technik
 Reines HTML, CSS und JavaScript in einer Datei, [jsPDF](https://github.com/parallax/jsPDF) für den PDF-Export und die Schrift Inter von Google Fonts.
