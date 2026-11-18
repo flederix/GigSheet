@@ -4,6 +4,7 @@ Dateien in diesem Ordner:
 - gigsheet.html – die ganze App
 - index.html – kleine Weiterleitung auf gigsheet.html (damit die Adresse ohne Dateinamen funktioniert)
 - manifest.webmanifest, sw.js, icon-*.png, icon.svg – machen die App installierbar und offline-fähig
+- docs/ – Ordner mit `GigSheet Design.pdf` und `GigSheet Handbuch.pdf` (Dokumentation, wird von der App nicht gebraucht)
 
 ## A) Online stellen mit GitHub Pages (kostenlos, ca. 10 Minuten)
 
@@ -11,7 +12,7 @@ Dateien in diesem Ordner:
 2. Oben rechts "+" → "New repository". Name z. B. `gigsheet`, "Public" wählen, "Create repository".
    (Das Repository enthält nur die App, keine Songs. Deine Songs bleiben im Browser.)
 3. Auf der neuen Seite "uploading an existing file" anklicken.
-4. ALLE Dateien aus dem Ordner (gigsheet.html, index.html, manifest.webmanifest, sw.js, icon.svg, icon-180.png, icon-192.png, icon-512.png) in das Fenster ziehen und unten "Commit changes" klicken.
+4. ALLE Dateien aus dem Ordner (gigsheet.html, index.html, manifest.webmanifest, sw.js, icon.svg, icon-180.png, icon-192.png, icon-512.png) in das Fenster ziehen, dazu den Ordner `docs` (ganzen Ordner ziehen), und unten "Commit changes" klicken.
 5. Oben "Settings" → links "Pages". Bei "Branch" `main` und `/ (root)` wählen → "Save".
 6. Nach 1–2 Minuten steht oben auf der Pages-Seite die Adresse:
    `https://DEIN-NAME.github.io/gigsheet/`

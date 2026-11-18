@@ -31,6 +31,10 @@ Songs are stored only in your browser (local storage) on each device. Nothing is
 ### Run locally
 Download the repository (**Code → Download ZIP**) and open `gigsheet.html`. Installation and offline mode need the page to be served over `http(s)`, for example via GitHub Pages.
 
+### Documentation
+- [Design guide (PDF, German)](docs/GigSheet%20Design.pdf): brand, colours, fonts, components and layout for designers and front-end developers
+- [User manual (PDF, German)](docs/GigSheet%20Handbuch.pdf): short manual with all functions
+
 ### Built with
 Plain HTML, CSS and JavaScript in one file, [jsPDF](https://github.com/parallax/jsPDF) for PDF export and the Inter font from Google Fonts.
 
@@ -65,6 +69,10 @@ Songs liegen nur im Browser (lokaler Speicher) des jeweiligen Geräts. Es wird n
 
 ### Lokal ausführen
 Repository herunterladen (**Code → Download ZIP**) und `gigsheet.html` öffnen. Installation und Offline-Modus brauchen eine Auslieferung über `http(s)`, zum Beispiel über GitHub Pages.
+
+### Dokumentation
+- [Design-Dokumentation (PDF)](docs/GigSheet%20Design.pdf): Marke, Farben, Schrift, Komponenten und Layout für Designer und Frontend-Entwickler
+- [Handbuch (PDF)](docs/GigSheet%20Handbuch.pdf): kleines Handbuch mit allen Funktionen
 
 ### Technik
 Reines HTML, CSS und JavaScript in einer Datei, [jsPDF](https://github.com/parallax/jsPDF) für den PDF-Export und die Schrift Inter von Google Fonts.
