@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>GigSheet</title>
-<meta name="theme-color" content="#171b1b"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="icon-180.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="GigSheet">
+<meta name="theme-color" content="#0b0e0d"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="icon-180.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="GigSheet">
 
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{--bg:#eef1f5;--surface:#fff;--ink:#14213d;--muted:#5d6b85;--line:#d3dae6;--chord:#2a4bd7;--cur:#ffe36e;--btn:#e3e9f3;--btnh:#d2dcef;
@@ -209,7 +209,7 @@ button svg{display:block}
 @media print{@page{size:A4;margin:0}html,body{background:#fff}body::before{display:none}main{padding:0;max-width:none}main>*:not(#sheetv),.stool,#side{display:none!important}#pgwrap{--sc:1!important;width:210mm;height:297mm;margin:0}.pg{box-shadow:none}}
 :root,:root:not([data-theme="light"]),:root[data-theme="dark"]{color-scheme:dark;--bg:#171b1b;--surface:#212727;--ink:#e9f0ec;--muted:#a4b4ae;--line:#323b39;--chord:#7fd4c1;--onacc:#0d2a25;--cur:rgba(127,212,193,.25);--btn:#2a3232;--btnh:#364140}
 :root[data-theme="light"]{color-scheme:light;--bg:#f2f5ef;--surface:#fbfcf8;--ink:#26332f;--muted:#68786f;--line:#dde4d9;--chord:#1d7a6c;--onacc:#fff;--cur:rgba(80,185,160,.3);--btn:#e6ece2;--btnh:#d9e2d4}
-body{font:14.5px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+body{font:14.5px/1.5 'Plus Jakarta Sans',Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
 button.go{background:var(--chord);color:var(--onacc)}
 button.go:hover{background:var(--chord);filter:brightness(1.08)}
 .row .tg:has(input:checked){background:var(--chord);border-color:var(--chord);color:var(--onacc)}
@@ -484,23 +484,499 @@ body.notools .bgh .tcol{animation-name:tnudge2}
 @media (prefers-reduced-motion:reduce){#tabind{transition:none}}
 .imp>.ih{color:var(--ink);font-size:.98rem;font-weight:700}.imp>.ih span{margin-left:8px;color:var(--muted);font-size:.8rem;font-weight:400}
 body.notools #impbox{display:none!important}
+/* v97 Kartenlook: Rahmen + schwebende Karten (nur Optik) */
+:root{--gap:clamp(8px,1.1vw,14px);--r1:clamp(16px,1.9vw,26px);--r2:clamp(9px,.95vw,13px)}
+:root,:root:not([data-theme="light"]),:root[data-theme="dark"]{--frame:#0f1312;--card:#1d2524}
+:root[data-theme="light"]{--frame:#e2e8de;--card:#fbfcf8}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--frame:#e2e8de;--card:#fbfcf8}}
+body{background:var(--frame)}
+.app{padding:var(--gap);gap:var(--gap);box-sizing:border-box}
+#side{top:var(--gap);height:calc(100vh - 2*var(--gap));border:0!important;border-radius:var(--r1)}
+.app>main{padding:0 0 var(--gap)}
+.top{box-shadow:none!important;border-bottom:0!important;padding-top:6px}
+#sheetv>.stool,#setv>.stool,.tools,#inp,.gbar{background:var(--card)!important;border:0!important;border-radius:var(--r1)!important;box-shadow:0 8px 26px -12px rgba(0,0,0,.4)}
+#sheetv>.stool,#setv>.stool{padding:12px 22px}
+#pgwrap>*,.page,#sheet .pg{border-radius:var(--gap)}
+.tabs{background:var(--card)!important}
+#sheetv>.stool,#setv>.stool{margin-bottom:var(--gap)}
+.tools,#sheetv>.stool,#setv>.stool,#gigv>.gbar{top:calc(var(--gap) + env(safe-area-inset-top,0px))!important;margin-bottom:var(--gap);box-shadow:0 0 0 var(--gap) var(--frame),0 12px 30px -10px rgba(0,0,0,.45)!important}
+.tools>.ops{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:12px 22px!important;margin:0!important}
+.app>main::before{content:"";position:sticky;top:0;display:block;height:var(--gap);margin:calc(-1*var(--gap)) 0 0;background:var(--frame);z-index:4;pointer-events:none}
+/* v100 einheitliche, dynamische Rundungen */
+.help.imp,.ops .grp.g-key,#side details.bk,.dmenu,.pane{border-radius:max(8px,calc(var(--r1) - 8px))!important}
+#gwrap,#side,#inp{border-radius:var(--r1)!important}
+button,select,input:not([type=checkbox]):not([type=range]):not([type=color]),textarea{border-radius:var(--r2)}
+#tbtn,#thm,#sidebtn,.tcol,.gbar .gnav{border-radius:var(--r2)!important}
+#pgwrap>*,.page,#sheet .pg{border-radius:calc(var(--r1)*.6)}
+/* v101 Lichtkante (Glas-Look) */
+:root{--edge:inset 1.5px 1.5px 0 rgba(255,255,255,.17),inset -1px -1px 0 rgba(0,0,0,.28);--sheen:none}
+:root[data-theme="light"]{--edge:inset 1.5px 1.5px 0 #fff,inset -1px -1px 0 rgba(38,51,47,.12);--sheen:none}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--edge:inset 1.5px 1.5px 0 #fff,inset -1px -1px 0 rgba(38,51,47,.12);--sheen:none}}
+#side,#inp,#gwrap,.tabs,.help.imp,#side details.bk{background-image:var(--sheen)}
+#side{box-shadow:8px 0 28px rgba(0,0,0,.3),var(--edge)!important}
+#inp,.tabs,.help.imp{box-shadow:0 8px 26px -12px rgba(0,0,0,.4),var(--edge)!important}
+.tools,#sheetv>.stool,#setv>.stool,#gigv>.gbar{background-image:var(--sheen);box-shadow:0 0 0 var(--gap) var(--frame),0 12px 30px -10px rgba(0,0,0,.45),var(--edge)!important}
+.ops .grp.g-key{border:0!important;background:transparent!important;box-shadow:none!important;padding-left:0!important;padding-right:0!important}
+.tools,#sheetv>.stool,#setv>.stool,#gigv>.gbar{box-shadow:0 0 0 var(--gap) var(--frame),0 16px 28px -6px rgba(0,0,0,.3),var(--edge)!important}
+:root[data-theme="light"] .tools,:root[data-theme="light"] #sheetv>.stool,:root[data-theme="light"] #setv>.stool,:root[data-theme="light"] #gigv>.gbar{box-shadow:0 0 0 var(--gap) var(--frame),var(--edge)!important}
+/* v102 feste Reiterposition, größere Reiter */
+@media (min-width:1180px){
+.top{display:grid!important;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:6px 18px}
+.top>.hrow{min-width:0}
+.top .curname{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.top>.tabs{margin-left:0!important;justify-self:center}
+.top>.tright{justify-self:end;margin-left:0}}
+.tabs{padding:5px!important;gap:12px!important}
+.tabs button{padding:10px 26px!important;font-size:15.5px!important;font-weight:700!important}
+.tabs button[aria-pressed="true"]{font-weight:800!important}
+#tabind{box-shadow:0 2px 12px rgba(127,212,193,.35),0 1px 0 rgba(255,255,255,.35) inset}
+.sst{white-space:nowrap}
+/* v103 schlanke Leisten, Status unten, Theme-Knopf schwebend */
+#tbtn{display:none!important}
+#side #sst{display:block;text-align:right;font-size:11px;color:var(--muted);opacity:.8;margin:14px 2px 0;white-space:nowrap}
+#side #ver{margin-top:2px!important}
+#thm{position:fixed;right:calc(var(--gap) + 6px);top:calc(env(safe-area-inset-top,0px) + 23px);z-index:30;width:40px;height:40px;padding:0;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.28)}
+/* gleiche Position und Größe für Rückgängig/Wiederholen */
+#tun,#tre,#und,#red,#bun,#bre,#sun,#sre{width:34px;height:34px;min-width:34px;padding:0;display:inline-flex;align-items:center;justify-content:center}
+.tools>.ops,#sheetv>.stool,#setv>.stool{padding:8px 18px!important}
+#inp{padding:8px 18px}
+.tools>.ops .grp{padding-top:5px!important;padding-bottom:5px!important;gap:8px 10px}
+.tools>.ops .row{gap:6px}
+.tools>.ops button,.tools>.ops select,.tools>.ops input{padding-top:5px;padding-bottom:5px;font-size:13px}
+#und,#red{position:relative;top:-6px}
+#inp>.tbar{margin-top:10px}
+#sidebtn{left:calc(var(--gap) + 16px)!important;top:calc(env(safe-area-inset-top,0px) + var(--gap) + 21px)!important}
+body.noside .hrow{padding-left:max(0px,calc(82px - var(--gap) - max(0px,(100vw - 2*var(--gap) - 1200px)/2)))!important}
+.top{padding-top:15px!important}
+#thm{top:calc(env(safe-area-inset-top,0px) + var(--gap) + 21px)!important}
+/* v107 Inspector-Funde: Kontrast, Klickfläche, Ziffern, Handy */
+body{font-variant-numeric:tabular-nums}
+#pgwrap,#sheet{font-variant-numeric:normal}
+:root[data-theme="light"]{--muted:#54645c}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--muted:#54645c}}
+:root:not([data-theme="light"]) :is(.dmenu .dng,#ldel,#bdel,#tclr,button.mini[data-fd]):not(:hover){color:#f87171}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) :is(.dmenu .dng,#ldel,#bdel,#tclr,button.mini[data-fd]):not(:hover){color:#b91c1c}}
+:root[data-theme="light"] :is(.dmenu .dng,#ldel,#bdel,#tclr,button.mini[data-fd]):not(:hover){color:#b91c1c}
+button.mini{min-width:28px;min-height:28px}
+@media (max-width:700px){
+.top>.tabs{display:flex;width:100%;box-sizing:border-box;gap:2px!important;padding:4px!important;justify-self:stretch}
+.top>.tabs button{flex:1 1 0;min-width:0;padding:9px 2px!important;font-size:13.5px!important;white-space:nowrap}
+#tabind{display:none}
+.tabs button[aria-pressed="true"],.tabs button[aria-pressed="true"]:hover{background:var(--chord)!important;box-shadow:0 1px 8px rgba(0,0,0,.28)!important}
+#sheetv>.stool .row,#setv>.stool .row,.gbar{flex-wrap:wrap!important}
+html,body{overflow-x:hidden}
+}
+button.mini{min-width:28px!important;min-height:28px!important}
+:root[data-theme="light"] #side{--muted:#3d4a44}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) #side{--muted:#3d4a44}}
+#side button.mini:not([data-fd]){color:var(--ink)}
+:root:not([data-theme="light"]) #side button.mini[data-fd]:not(:hover){color:#fca5a5}
+:root[data-theme="light"] #side button.mini[data-fd]:not(:hover){color:#991b1b}
+body:not(.notools) #sheetv>.stool,body:not(.notools) #setv>.stool{padding-top:18px!important}
+/* v109 Info-Knopf */
+#side #sst,#sst{display:none!important}
+#verw{position:relative;margin-top:14px;padding-bottom:2px;flex:none}
+#verbtn{width:32px;height:32px;padding:0;display:inline-flex;align-items:center;justify-content:center;color:var(--muted);background:transparent;box-shadow:none;border:0;border-radius:50%;cursor:help}
+#verbtn:hover,#verbtn:focus-visible{color:var(--chord);background:var(--btn)}
+#verpop{position:absolute;left:0;bottom:calc(100% + 8px);min-width:190px;padding:12px 14px;border-radius:var(--r2);background:var(--card);color:var(--ink);display:flex;flex-direction:column;gap:3px;font-size:12.5px;line-height:1.35;box-shadow:0 10px 30px rgba(0,0,0,.4),var(--edge);opacity:0;transform:translateY(6px) scale(.97);transform-origin:bottom left;pointer-events:none;transition:opacity .16s ease,transform .18s ease;z-index:40}
+#verpop b{font-size:14px;color:var(--chord)}
+#verpop span{color:var(--muted)}
+#verw:hover #verpop,#verw:focus-within #verpop{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){#verpop{transition:none}}
+#verw{margin:2px -6px -12px 0!important;padding:0!important;align-self:flex-end;display:flex;justify-content:flex-end}
+#verbtn{width:24px;height:24px;opacity:.55}
+#verbtn svg{width:15px;height:15px}
+#verbtn:hover,#verbtn:focus-visible{opacity:1}
+#verpop{left:auto!important;right:0;transform-origin:bottom right}
+#verbtn{width:28px;height:28px;min-height:28px!important;min-width:28px!important}
+#verw{margin:0 -8px -14px 0!important}
+/* v112 Kopfzeile: Reiter links, Titel daneben, Logo eingeprägt in der Bibliothek */
+.brand{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+#sidelogo{position:absolute;top:22px;right:20px;width:40px;height:40px;pointer-events:none}
+#sidelogo g{stroke:rgba(0,0,0,.34);filter:drop-shadow(0 1.5px 0 rgba(255,255,255,.14))}
+:root[data-theme="light"] #sidelogo g{stroke:rgba(38,51,47,.26);filter:drop-shadow(0 1.5px 0 rgba(255,255,255,.75))}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) #sidelogo g{stroke:rgba(38,51,47,.26);filter:drop-shadow(0 1.5px 0 rgba(255,255,255,.75))}}
+@media (min-width:900px){
+.top{display:flex!important;flex-wrap:nowrap!important;align-items:center;gap:6px 22px}
+.top>.tabs{order:1;justify-self:auto;flex:none}
+.top>.hrow{order:2;flex:1 1 0;min-width:0}
+.top>.tright{order:3;margin-left:0;flex:none;width:0;overflow:visible}}
+.top .curname{border-left:0!important;padding-left:0!important;font-size:1rem;max-width:100%}
+.hrow>#sidebtn~.curname{margin:0}
+body.noside .hrow{padding-left:0!important}
+body.noside .top{padding-left:max(0px,calc(82px - var(--gap) - max(0px,(100vw - 2*var(--gap) - 1200px)/2)))!important}
+@media (max-width:899px){.top{padding-left:max(0px,calc(82px - var(--gap) - max(0px,(100vw - 2*var(--gap) - 1200px)/2)))!important}}
+@media (max-width:700px){.top{padding-left:0!important;flex-direction:column;align-items:stretch}
+.top>.hrow{order:0;padding-left:68px;min-height:40px}.top>.tabs{order:1}}
+@media (max-width:480px){.top>.tabs button{font-size:12.5px!important;padding:9px 1px!important;letter-spacing:-.01em}}
+.top .curname{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.top>.hrow{padding-right:56px}
+/* v113 weniger Lücke, größeres Logo, Lichtkante auf allen großen Flächen */
+.top{margin-bottom:0!important;padding-bottom:8px!important}
+#sidelogo{width:58px;height:58px;top:20px;right:18px}
+#sidelogo g{stroke:rgba(0,0,0,.5);filter:drop-shadow(0 2px 0 rgba(255,255,255,.2))}
+:root[data-theme="light"] #sidelogo g{stroke:rgba(38,51,47,.4);filter:drop-shadow(0 2px 0 rgba(255,255,255,.9))}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) #sidelogo g{stroke:rgba(38,51,47,.4);filter:drop-shadow(0 2px 0 rgba(255,255,255,.9))}}
+#src,.pane,#gwrap{background-image:var(--sheen);box-shadow:var(--edge)!important}
+#gwrap{box-shadow:0 8px 26px -12px rgba(0,0,0,.4),var(--edge)!important}
+#pg.pg,#spg.pg,#pgwrap>.pg{box-shadow:-1.5px -1.5px 0 rgba(255,255,255,.3),0 12px 36px rgba(0,0,0,.45)!important}
+:root[data-theme="light"] #pg.pg,:root[data-theme="light"] #spg.pg,:root[data-theme="light"] #pgwrap>.pg{box-shadow:-1.5px -1.5px 0 #fff,1px 1px 0 rgba(38,51,47,.12),0 12px 32px rgba(38,51,47,.18)!important}
+/* v114 Logo: Ecke, Füllung folgt der Maus */
+@property --lr{syntax:"<length>";inherits:true;initial-value:0px}
+#sidelogo{position:absolute;top:10px;right:10px;width:58px;height:58px;pointer-events:auto;--mx:50%;--my:50%;--lr:0px;transition:--lr 1.15s cubic-bezier(.3,.6,.2,1)}
+#sidelogo.on{--lr:110px}
+#sidelogo svg{position:absolute;inset:0;width:100%;height:100%}
+#sidelogo .lf g{stroke:var(--chord);filter:drop-shadow(0 0 6px color-mix(in srgb,var(--chord) 55%,transparent))}
+#sidelogo .lf{-webkit-mask-image:radial-gradient(circle at var(--mx) var(--my),#000 var(--lr),transparent calc(var(--lr) + 2px));mask-image:radial-gradient(circle at var(--mx) var(--my),#000 var(--lr),transparent calc(var(--lr) + 2px))}
+@media (prefers-reduced-motion:reduce){#sidelogo{transition:none}}
+.top{position:relative;z-index:6}
+/* v116 Editor: ein Rahmen (Leiste + Arbeitsfeld), Feld eingelassen */
+:root,:root:not([data-theme="light"]),:root[data-theme="dark"]{--field:#101615;--fieldsh:inset 0 2px 8px rgba(0,0,0,.35)}
+:root[data-theme="light"]{--field:#f0f3ec;--fieldsh:inset 0 1px 5px rgba(38,51,47,.14)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--field:#f0f3ec;--fieldsh:inset 0 1px 5px rgba(38,51,47,.14)}}
+#editv{background:var(--card);border-radius:var(--r1);box-shadow:0 8px 26px -12px rgba(0,0,0,.4),var(--edge);padding:0 18px 18px}
+#editv .tools{background:var(--card)!important;box-shadow:none!important;border-radius:0!important;margin-bottom:0!important;background-image:none!important;border-bottom:1px solid var(--line)!important;padding:0 0 4px}
+#editv .tools>.ops{padding-left:0!important;padding-right:0!important}
+#editv .grid{margin-top:14px;display:block}
+#editv .pane{background:var(--field)!important;background-image:none!important;border:1px solid var(--line)!important;border-radius:max(10px,calc(var(--r1) - 12px))!important;box-shadow:var(--fieldsh)!important;padding:12px 22px 18px}
+/* v117 Editor-Ecken beim Scrollen, gleicher Abstand, Menü-Knopf nur oben */
+#editv .tools{margin:0 -18px!important;padding:0 18px 4px!important;border-radius:var(--r1) var(--r1) 0 0!important;box-shadow:inset 1.5px 1.5px 0 rgba(255,255,255,.17)!important;background-image:var(--sheen)!important;background-color:var(--card)!important}
+:root[data-theme="light"] #editv .tools{box-shadow:inset 1.5px 1.5px 0 #fff!important}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) #editv .tools{box-shadow:inset 1.5px 1.5px 0 #fff!important}}
+#editv .tools>.ops{padding-top:8px!important}
+.top{padding-bottom:var(--gap)!important}
+#sidebtn{transition:opacity .22s ease}
+body.scrolled.noside #sidebtn{opacity:0;pointer-events:none}
+/* v121 Blur-Verlauf unter Werkzeugleisten */
+.tools::after,#sheetv>.stool::after,#setv>.stool::after,#gigv>.gbar::after{content:"";position:absolute;left:0;right:0;top:calc(100% + var(--gap));height:40px;pointer-events:none;opacity:0;transition:opacity .25s ease;background:linear-gradient(var(--frame),transparent);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);-webkit-mask-image:linear-gradient(#000,transparent);mask-image:linear-gradient(#000,transparent);z-index:-1}
+#editv .tools::after{top:100%;background:linear-gradient(var(--card),transparent)}
+body.scrolled .tools::after,body.scrolled #sheetv>.stool::after,body.scrolled #setv>.stool::after,body.scrolled #gigv>.gbar::after{opacity:1}
+/* v123 Edit: einfarbige Leiste ohne Trennstrich */
+#editv .tools{background-image:none!important;background-color:var(--card)!important;border-bottom:0!important}
+/* v124 Edit: Ecken beim Scrollen */
+#editv .tools::before{content:"";position:absolute;left:0;right:0;top:0;bottom:calc(-1 * var(--pr));pointer-events:none;z-index:3;opacity:0;transition:opacity .2s ease;
+background:
+radial-gradient(circle at 100% 100%,transparent calc(var(--r1) - .5px),var(--frame) calc(var(--r1) + .5px)) left top/var(--r1) var(--r1) no-repeat,
+radial-gradient(circle at 0 100%,transparent calc(var(--r1) - .5px),var(--frame) calc(var(--r1) + .5px)) right top/var(--r1) var(--r1) no-repeat,
+radial-gradient(circle at 100% 100%,transparent calc(var(--pr) - 1px),var(--line) calc(var(--pr) - 1px) var(--pr),var(--card) var(--pr)) left 18px bottom/var(--pr) var(--pr) no-repeat,
+radial-gradient(circle at 0 100%,transparent calc(var(--pr) - 1px),var(--line) calc(var(--pr) - 1px) var(--pr),var(--card) var(--pr)) right 18px bottom/var(--pr) var(--pr) no-repeat}
+#editv{--pr:max(10px,calc(var(--r1) - 12px))}
+body.scrolled #editv .tools::before{opacity:1}
+#editv .tools{overflow:visible!important}
+/* v125 Edit: ein Kasten, Leiste mit voller Lichtkante, keine Unschärfe am Arbeitsfeld */
+#editv .tools::after{display:none!important}
+#editv .tools,:root[data-theme="light"] #editv .tools{box-shadow:var(--edge)!important}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) #editv .tools{box-shadow:var(--edge)!important}}
+/* v126 keine Linie unter der Leiste */
+#editv .tools{box-shadow:inset 1.5px 1.5px 0 rgba(255,255,255,.17),inset -1px 0 0 rgba(0,0,0,.28)!important}
+:root[data-theme="light"] #editv .tools{box-shadow:inset 1.5px 1.5px 0 #fff,inset -1px 0 0 rgba(38,51,47,.12)!important}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) #editv .tools{box-shadow:inset 1.5px 1.5px 0 #fff,inset -1px 0 0 rgba(38,51,47,.12)!important}}
+/* v127 Edit: Arbeitsfeld-Oberkante fest, Abstand = --gap */
+#editv .grid{margin-top:var(--gap)!important}
+#editv .tools::before{bottom:auto!important;height:var(--r1)!important;background:
+radial-gradient(circle at 100% 100%,transparent calc(var(--r1) - .5px),var(--frame) calc(var(--r1) + .5px)) left top/var(--r1) var(--r1) no-repeat,
+radial-gradient(circle at 0 100%,transparent calc(var(--r1) - .5px),var(--frame) calc(var(--r1) + .5px)) right top/var(--r1) var(--r1) no-repeat!important}
+#editv .tools::after{display:block!important;content:"";position:absolute;left:2px;right:2px;top:100%;height:calc(var(--gap) + var(--pr));opacity:1!important;z-index:3;pointer-events:none;-webkit-backdrop-filter:none;backdrop-filter:none;-webkit-mask-image:none;mask-image:none;
+background:
+linear-gradient(var(--card),var(--card)) 0 0/100% var(--gap) no-repeat,
+radial-gradient(circle at 100% 100%,transparent calc(var(--pr) - 1px),var(--line) calc(var(--pr) - 1px) var(--pr),var(--card) var(--pr)) left 16px top var(--gap)/var(--pr) var(--pr) no-repeat,
+radial-gradient(circle at 0 100%,transparent calc(var(--pr) - 1px),var(--line) calc(var(--pr) - 1px) var(--pr),var(--card) var(--pr)) right 16px top var(--gap)/var(--pr) var(--pr) no-repeat,
+linear-gradient(var(--line),var(--line)) left calc(16px + var(--pr)) top var(--gap)/calc(100% - 32px - 2 * var(--pr)) 1px no-repeat}
+/* v127 Import: gleicher Abstand Werkzeuge -> Arbeitsfeld */
+.help.imp{margin-bottom:0!important}
+#src{margin-top:var(--gap)!important}
+body.notools #src{margin-top:calc(var(--gap) - 10px)!important}
+/* v128 Edit: Kasten und Leiste exakt gleiche Farbe (kein Innenglühen) */
+#editv{box-shadow:0 8px 26px -12px rgba(0,0,0,.4),inset 1.5px 1.5px 0 rgba(255,255,255,.17),inset -1px -1px 0 rgba(0,0,0,.28)!important}
+#editv .tools{box-shadow:inset 1.5px 1.5px 0 rgba(255,255,255,.17),inset -1px 0 0 rgba(0,0,0,.28)!important}
+:root[data-theme="light"] #editv{box-shadow:0 8px 26px -12px rgba(0,0,0,.4),inset 1.5px 1.5px 0 #fff,inset -1px -1px 0 rgba(38,51,47,.12)!important}
+:root[data-theme="light"] #editv .tools{box-shadow:inset 1.5px 1.5px 0 #fff,inset -1px 0 0 rgba(38,51,47,.12)!important}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) #editv{box-shadow:0 8px 26px -12px rgba(0,0,0,.4),inset 1.5px 1.5px 0 #fff,inset -1px -1px 0 rgba(38,51,47,.12)!important}:root:not([data-theme="dark"]) #editv .tools{box-shadow:inset 1.5px 1.5px 0 #fff,inset -1px 0 0 rgba(38,51,47,.12)!important}}
+/* v130 einheitliche Arbeitsfelder, keine Verläufe */
+#src,#ugsrc,#setv .pane,#gwrap{background:var(--field)!important;background-image:none!important;border:1px solid var(--line)!important;border-radius:max(10px,calc(var(--r1) - 12px))!important;box-shadow:var(--fieldsh)!important}
+/* v131 Bibliothek-Knopf: offen oben rechts in der Leiste, zu links neben den Reitern; Logo oben links */
+#sidebtn{position:static!important;left:auto!important;top:auto!important;opacity:1!important;pointer-events:auto!important;flex:none;order:0;margin-right:-8px}
+body:not(.noside) #sidebtn{display:none!important}
+#sideclose{position:absolute;top:14px;right:14px;z-index:3;width:40px;height:40px;padding:0;display:inline-flex;align-items:center;justify-content:center;flex:none;border-radius:var(--r2)}
+#sidelogo{left:14px!important;right:auto!important;top:12px!important}
+#side h2{padding-left:68px!important;padding-right:52px;margin:-23px 0 21px!important;line-height:46px!important}
+body.noside .hrow,body.noside .top{padding-left:0!important}
+@media (max-width:700px){#sidebtn{position:absolute!important;left:0;top:6px;margin:0}body.noside .top>.hrow{padding-left:52px!important}}
+/* v132 Kopfzeile fest, Bibliothek-Knopf hängt links heraus */
+.top{position:sticky!important;top:0;z-index:20!important;background:var(--frame);margin-top:0!important}
+.app>main::before{display:none!important}
+.tools,#sheetv>.stool,#setv>.stool,#gigv>.gbar{top:var(--hh,80px)!important}
+@media (min-width:1304px){body.noside #sidebtn{margin-left:-54px;margin-right:-8px}}
+/* v133 Knopf fest am gleichen Ort; Bibliothek richtet sich daran aus (ab 900px) */
+@media (min-width:900px){
+:root{--ax:max(var(--gap),calc((100vw - 1254px)/2 - 16px))}
+.app{padding-left:var(--ax)!important}
+.app>main{margin:0!important}
+body.noside .app>main{margin-left:70px!important}
+body #sidebtn[aria-label]{position:fixed!important;left:calc(var(--ax) + 16px)!important;top:calc(env(safe-area-inset-top,0px) + 41px)!important;margin:0!important;display:inline-flex!important;z-index:30}
+#sideclose{display:none!important}
+#sidelogo{left:auto!important;right:14px!important;top:12px!important}
+#side h2{padding-left:56px!important;padding-right:60px!important;margin:-7px 0 5px!important}
+}
+/* v134 Import: feste Feldgröße */
+#src,#ugsrc{resize:none!important}
+/* v135 Kopfzeile ruhig; Edit scrollt im inneren Arbeitsfeld */
+.top{top:var(--gap)!important}
+.top::before{content:"";position:absolute;left:0;right:0;top:calc(-1 * var(--gap));height:var(--gap);background:var(--frame);pointer-events:none}
+.tools,#sheetv>.stool,#setv>.stool,#gigv>.gbar{top:calc(var(--hh,82px) + var(--gap))!important}
+#editv{height:calc(100dvh - var(--hh,82px) - 2 * var(--gap));margin-bottom:calc(-1 * var(--gap));min-height:300px;display:flex;flex-direction:column;overflow:hidden}
+#editv .tools{position:static!important;flex:none;max-height:58%;overflow:auto!important}
+#editv .tools::before,#editv .tools::after{display:none!important}
+#editv .grid{flex:1 1 0;min-height:0}
+#editv .pane{height:100%;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--muted) 45%,transparent) transparent}
+/* v136 Reiter: mehr Rand und etwas größer */
+@media (min-width:701px){.tabs{padding:8px 10px!important;gap:10px!important}.tabs button{padding:12px 28px!important;font-size:16px!important}}
+@media (max-width:700px){.top>.tabs{padding:5px!important}.top>.tabs button{padding:10px 2px!important}}
+@media (min-width:701px){#thm{top:calc(env(safe-area-inset-top,0px) + var(--gap) + 27px)!important}}
+/* v137 Bibliothek bündig mit den Reitern, Knopf nur als Icon */
+@media (min-width:900px){
+#side{top:calc(var(--gap) + 15px)!important;height:calc(100dvh - var(--gap) - 15px - var(--gap))!important}
+#sidelogo{top:3px!important}
+#side h2{margin:-22px 0 5px!important}
+body #sidebtn[aria-label]{background:transparent!important;border:0!important;box-shadow:none!important;color:var(--muted)}
+body #sidebtn[aria-label]:hover,body #sidebtn[aria-label]:focus-visible{color:var(--chord);background:color-mix(in srgb,var(--ink) 8%,transparent)!important}
+}
+/* Design felix1 (Labor-Vorlage) */
+:root{--gap:clamp(8px,1.1vw,15px);--r1:clamp(16px,1.9vw,25px);--r2:clamp(10px,1.4vw,20px)}
+:root[data-theme="dark"]{--frame:#0b0e0d;--card:#171e1d;--field:#0b0e0d;--fieldsh:inset 0 2px 8px rgba(0,0,0,0);--btn:#212c2a;--btnh:#2c3a38;--line:#2d3432;--ink:#e9f0ec;--muted:#9baba5;--chord:#64d3bb;--onacc:#06231e;--edge:inset 1.5px 1.5px 0 rgba(255,255,255,0.13),inset -1px -1px 0 rgba(0,0,0,0.2)}
+:root[data-theme="dark"] #side{background:#171e1d!important;--sbg:#171e1d;box-shadow:8px 0 28px rgba(0,0,0,0.0),inset 1.5px 1.5px 0 rgba(255,255,255,0.13),inset -1px -1px 0 rgba(0,0,0,0.2)!important}
+:root[data-theme="dark"] #side details.bk{background:#171e1d!important}
+:root[data-theme="dark"] #inp,:root[data-theme="dark"] .tabs,:root[data-theme="dark"] .help.imp,:root[data-theme="dark"] #gwrap,:root[data-theme="dark"] #editv{box-shadow:0 8px 26px -12px rgba(0,0,0,0),inset 1.5px 1.5px 0 rgba(255,255,255,0.13),inset -1px -1px 0 rgba(0,0,0,0.2)!important}
+:root[data-theme="dark"] #editv .tools{box-shadow:inset 1.5px 1.5px 0 rgba(255,255,255,0.13),inset -1px 0 0 rgba(0,0,0,0.2)!important}
+:root[data-theme="light"]{--frame:#d5e1df;--card:#ffffff;--field:#f7fdfc;--fieldsh:inset 0 2px 8px rgba(38,51,47,0.2);--btn:#eef6f5;--btnh:#c6e2de;--line:#e2eeec;--ink:#1c2120;--muted:#586260;--chord:#148578;--onacc:#ffffff;--edge:inset 1.5px 1.5px 0 rgba(255,255,255,0.35),inset -1px -1px 0 rgba(38,51,47,0.09)}
+:root[data-theme="light"] #side{background:#ffffff!important;--sbg:#ffffff;box-shadow:8px 0 28px rgba(0,0,0,0.22),inset 1.5px 1.5px 0 rgba(255,255,255,0.35),inset -1px -1px 0 rgba(38,51,47,0.09)!important}
+:root[data-theme="light"] #side details.bk{background:#ffffff!important}
+:root[data-theme="light"] #inp,:root[data-theme="light"] .tabs,:root[data-theme="light"] .help.imp,:root[data-theme="light"] #gwrap,:root[data-theme="light"] #editv{box-shadow:0 8px 26px -12px rgba(0,0,0,0.26),inset 1.5px 1.5px 0 rgba(255,255,255,0.35),inset -1px -1px 0 rgba(38,51,47,0.09)!important}
+:root[data-theme="light"] #editv .tools{box-shadow:inset 1.5px 1.5px 0 rgba(255,255,255,0.35),inset -1px 0 0 rgba(38,51,47,0.09)!important}
+/* Bibliothek: natürliche Position = Ziel, damit sticky auf kurzen Seiten nicht 15px zu hoch sitzt */
+@media (min-width:900px){#side{margin-top:15px}}
+/* Gig: kein Unschärfe-Verlauf unter der Werkzeugleiste, nur Rahmenfarbe wie in Setlist */
+#gigv>.gbar::after{display:none!important}
+/* Bibliothek: Titel zentriert, Logo in Hintergrundfarbe als Relief (Animation bleibt) */
+#side h2{text-align:center!important;padding-left:68px!important;padding-right:68px!important}
+#sidelogo .lb g{stroke:var(--sbg)!important;filter:drop-shadow(-1px -1px 0 rgba(255,255,255,.14)) drop-shadow(1.5px 1.5px 0 rgba(0,0,0,.4))!important}
+:root[data-theme="light"] #sidelogo .lb g{filter:drop-shadow(-1px -1px 0 rgba(255,255,255,.9)) drop-shadow(1.5px 1.5px 0 rgba(38,51,47,.22))!important}
+/* A4-Arbeitsbreite und Gliederung (Revolver) */
+.gl{display:none}
+@media (min-width:900px){
+#editv .grid{display:flex!important;gap:var(--gap);justify-content:center;container-type:inline-size}
+#editv .grid>.pane{flex:1 1 794px;max-width:794px;min-width:460px}
+.wk{display:flex;gap:var(--gap);justify-content:center;align-items:flex-start;container-type:inline-size}
+.wk #src{flex:1 1 794px;max-width:794px;min-width:0;width:auto}
+.wk .gl{margin-top:var(--gap)}
+body.notools .wk .gl{margin-top:calc(var(--gap) - 10px)}
+.gl{display:flex;flex-direction:column;gap:10px;flex:1 1 190px;min-width:170px;max-width:300px;align-self:flex-start}
+@container (max-width:720px){.gl{display:none}}
+}
+.gl-hd{display:flex;align-items:baseline;justify-content:space-between;padding:0 4px}
+.gl-hd h3{margin:0;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.gl-n{font:600 .75rem ui-monospace,Menlo,monospace;color:var(--muted)}
+.gl-win{position:relative;height:308px;perspective:540px;overflow:hidden;background:var(--field);border:1px solid var(--line);border-radius:max(10px,calc(var(--r1) - 12px));box-shadow:var(--fieldsh);outline:none}
+.gl-win:focus-visible{border-color:var(--chord)}
+.gl-win::before,.gl-win::after{content:"";position:absolute;left:0;right:0;height:64px;z-index:3;pointer-events:none}
+.gl-win::before{top:0;background:linear-gradient(var(--field),transparent)}
+.gl-win::after{bottom:0;background:linear-gradient(transparent,var(--field))}
+.gl-notch{position:absolute;left:7px;right:7px;top:50%;height:48px;transform:translateY(-50%);border:1.5px solid color-mix(in srgb,var(--chord) 65%,transparent);border-radius:var(--r2);pointer-events:none;z-index:2}
+.gl-drum{position:absolute;inset:0;transform-style:preserve-3d;transform:translateZ(-92px)}
+.gl-it{position:absolute;left:12px;right:12px;top:50%;height:42px;margin-top:-21px;display:flex;align-items:center;gap:9px;padding:0 12px;border-radius:var(--r2);background:var(--btn);color:var(--muted);cursor:pointer;backface-visibility:hidden;transform:rotateX(calc(var(--d,0) * -28deg)) translateZ(92px);opacity:var(--o,0);transition:transform .62s cubic-bezier(.25,1.1,.3,1.14),opacity .4s,background .3s,color .3s;overflow:hidden}
+.gl-it i{flex:none;width:10px;height:10px;border-radius:50%;border:2px solid currentColor;opacity:.7;transition:background .3s,border-color .3s,opacity .3s}
+.gl-it b{flex:1;min-width:0;font-size:.9rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gl-it small{flex:none;font-size:.7rem;opacity:.75}
+.gl-it.on{color:var(--ink);background:color-mix(in srgb,var(--chord) 17%,var(--btn))}
+.gl-it.on i{background:var(--chord);border-color:var(--chord);opacity:1}
+.gl-empty{position:absolute;inset:0;margin:0;padding:20px;display:flex;align-items:center;text-align:center;z-index:1}
+.gl-ft{display:flex;gap:8px;justify-content:center}
+.gl-ft button{width:44px;height:34px;padding:0;border-radius:var(--r2);background:var(--btn);color:var(--ink);font-size:.8rem}
+@media (prefers-reduced-motion:reduce){.gl-it{transition:none}}
+/* v143: kleinere Walze, keine Kopfzeile, Breite verstellbar */
+.gl-hd{display:none!important}
+.gl-win{height:206px!important}
+.gl-win::before,.gl-win::after{height:46px!important}
+.gl-rs{display:none}
+@media (min-width:900px){
+#editv .grid>.pane{flex:1 1 var(--paneW,0px)!important;max-width:var(--paneW,none)!important}
+.wk #src{flex:1 1 var(--paneW,0px)!important;max-width:var(--paneW,none)!important}
+.gl-rs{display:block;flex:none;width:14px;margin:0 calc(var(--gap) / -2 - 1px);align-self:stretch;cursor:col-resize;position:relative;z-index:4;touch-action:none;outline:none}
+.wk .gl-rs{margin-top:var(--gap)}
+.gl-rs::after{content:"";position:absolute;left:50%;top:50%;width:4px;height:44px;margin:-22px 0 0 -2px;border-radius:4px;background:var(--line);opacity:.0;transition:opacity .2s,background .2s}
+.gl-rs:hover::after,.gl-rs:focus-visible::after,.gl-rs.on::after{opacity:1;background:var(--chord)}
+@container (max-width:720px){.gl-rs{display:none}}
+}
+.gl-notch{display:none!important}
+/* Cursor in Edit: Signalfarbe, ruhiges Blinken */
+:root{--sig:#ffb020}
+@keyframes curb{0%,100%{opacity:1}50%{opacity:.35}}
+.c.cur,.ch.cur{background:var(--sig)!important;color:#1a1200!important;border-radius:3px;animation:curb 1.3s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.c.cur,.ch.cur{animation:none}}
+/* Akkord-Vorschläge */
+.gh{position:absolute;top:0;font-weight:700;color:var(--chord);opacity:.5;cursor:pointer;touch-action:none;user-select:none;white-space:pre;border-bottom:1.5px dashed currentColor;transition:opacity .15s}
+.gh:hover{opacity:.95}
+.sec .sg{margin-left:12px;padding:2px 10px;border:1.5px dashed color-mix(in srgb,var(--chord) 60%,transparent);border-radius:999px;color:var(--chord);font:600 .72rem/1.4 inherit;font-family:inherit;cursor:pointer;vertical-align:middle;opacity:.85}
+.sec .sg:hover{opacity:1;background:color-mix(in srgb,var(--chord) 14%,transparent)}
+/* Liquid Glass Menüs */
+@keyframes gin{from{opacity:0;transform:scale(.94)}}
+.dmenu,.gpop{background:color-mix(in srgb,var(--card) 56%,transparent)!important;-webkit-backdrop-filter:blur(26px) saturate(1.8);backdrop-filter:blur(26px) saturate(1.8);border:1px solid rgba(255,255,255,.15)!important;border-radius:16px!important;padding:6px!important;box-shadow:0 24px 50px -14px rgba(0,0,0,.62),0 4px 14px rgba(0,0,0,.24),inset 1.5px 1.5px 0 rgba(255,255,255,.22),inset -1px -1px 0 rgba(0,0,0,.2)!important;animation:gin .14s cubic-bezier(.2,.9,.3,1.1)}
+:root[data-theme="light"] .dmenu,:root[data-theme="light"] .gpop{background:rgba(255,255,255,.58)!important;border-color:rgba(255,255,255,.85)!important;box-shadow:0 20px 44px -16px rgba(38,51,47,.38),0 3px 10px rgba(38,51,47,.12),inset 1.5px 1.5px 0 #fff,inset -1px -1px 0 rgba(38,51,47,.1)!important}
+.gpop{position:fixed;z-index:300;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;color:var(--ink);display:flex;flex-direction:column;gap:2px}
+.gpop::-webkit-scrollbar{display:none}
+.gi,.dmenu button{display:flex;align-items:center;gap:8px;min-height:34px;padding:6px 12px 6px 8px;border-radius:10px;border:0;background:transparent;color:var(--ink);text-align:left;font:inherit;font-size:inherit;cursor:default;white-space:nowrap;box-shadow:none}
+.dmenu button{padding-left:12px;font-size:.9rem;font-weight:500;width:100%}
+.gi .ck{flex:none;width:16px;text-align:center;font-style:normal;font-weight:700;color:inherit}
+.gi.sel{font-weight:600}
+.gi.dis{opacity:.4}
+.gi.act,.dmenu button:not(.dng):hover{background:var(--chord)!important;color:var(--onacc)!important}
+.gg,.dml{padding:8px 12px 4px;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.dmenu{margin-top:4px;gap:2px}
+.dmenu .dng{margin-top:4px;border-radius:10px;justify-content:center}
+/* Glas: leichte Verzerrung (Linsen-Effekt) wo der Browser es kann, sonst Unschärfe */
+.dmenu,.gpop{-webkit-backdrop-filter:blur(26px) saturate(1.8);backdrop-filter:blur(26px) saturate(1.8);backdrop-filter:url(#gl-lens) blur(5px) saturate(1.7)}
+/* Sheet/Setlist: Beschriftung über den Feldern zentriert, Warnzeichen */
+.stool .f{align-items:center;text-align:center}
+.stool .f>span{justify-content:center}
+.fw{display:inline-flex;align-items:center;justify-content:center;flex:none;width:15px;height:15px;border-radius:50%;font:700 10px/1 inherit;font-style:normal;color:#e5484d;border:1.5px solid color-mix(in srgb,#e5484d 65%,transparent);opacity:.8;cursor:help;outline:none}
+.fw:hover,.fw:focus-visible{opacity:1}
+.fw[hidden]{display:none}
+.gtip{position:fixed;z-index:400;max-width:260px;padding:8px 12px;border-radius:12px;font-size:.78rem;font-weight:500;line-height:1.35;color:var(--ink);background:color-mix(in srgb,var(--card) 60%,transparent);-webkit-backdrop-filter:blur(22px) saturate(1.7);backdrop-filter:blur(22px) saturate(1.7);border:1px solid rgba(255,255,255,.15);box-shadow:0 14px 32px -12px rgba(0,0,0,.55),inset 1px 1px 0 rgba(255,255,255,.2);pointer-events:none;animation:gin .14s ease-out}
+:root[data-theme="light"] .gtip{background:rgba(255,255,255,.7);border-color:rgba(255,255,255,.9);box-shadow:0 12px 28px -12px rgba(38,51,47,.4),inset 1px 1px 0 #fff}
+/* Sheet: konstante Reglerbreite, Warnzeichen verzögert */
+.stool label.f:has(>input[type=range]){width:158px;min-width:158px}
+.stool .f>span{white-space:nowrap}
+#fsv,#gv,#lv{display:inline-block;min-width:5.6ch;text-align:left;font-variant-numeric:tabular-nums}
+#gv,#lv{min-width:3.4ch}
+.fw{visibility:hidden;opacity:0;transition:opacity .35s}
+.fw.on{visibility:visible;opacity:.8}
+.fw.on:hover,.fw.on:focus-visible{opacity:1}
+/* Werkzeugleisten ohne Schlagschatten aufs Papier */
+:root[data-theme] .tools,:root[data-theme] #sheetv>.stool,:root[data-theme] #setv>.stool,:root[data-theme] #gigv>.gbar{box-shadow:0 0 0 var(--gap) var(--frame),var(--edge)!important}
+#sheetv>.stool::after,#setv>.stool::after,.tools::after{display:none!important}
+/* Breitenziehen: fester Walzenbereich, keine Sprünge */
+@media (min-width:900px){.gl{flex:0 0 188px!important;min-width:0!important;max-width:none!important;contain:layout style}}
+html.gl-drag,html.gl-drag *{user-select:none!important;cursor:col-resize!important}
+html.gl-drag .gl-it{transition:none!important}
+html.gl-drag #editv .pane,html.gl-drag #src{will-change:width}
+/* Songtitel: kursiver Überhang nicht abschneiden */
+.top .curname{padding-right:.4em!important}
+/* Vollbild-Knopf neben dem Hell/Dunkel-Umschalter */
+#hfull{width:40px;height:40px;padding:0;display:none;align-items:center;justify-content:center;border:1.5px solid var(--chord);color:var(--chord);background:transparent;border-radius:var(--r2);transition:background .15s,color .15s,transform .15s}
+#hfull:hover{background:var(--chord);color:var(--onacc);transform:translateY(-1px)}
+@media (min-width:701px){#hfull:not([hidden]){display:inline-flex;position:fixed;z-index:30;right:calc(var(--gap) + 6px + 52px);top:calc(env(safe-area-inset-top,0px) + var(--gap) + 27px);box-shadow:0 4px 14px rgba(0,0,0,.28)}}
+/* Sheet: Anfasser links und rechts vom Blatt */
+#pgwrap{position:relative}
+.pz{position:absolute;top:0;bottom:0;width:18px;cursor:col-resize;touch-action:none;z-index:4;outline:none}
+.pzl{left:-22px}.pzr{right:-22px}
+.pz b{position:sticky;top:calc(50vh - 22px);display:block;width:4px;height:44px;margin:0 auto;border-radius:4px;background:var(--line);opacity:0;transition:opacity .2s,background .2s}
+.pz:hover b,.pz.on b,.pz:focus-visible b{opacity:1;background:var(--chord)}
+@media (max-width:899px){.pz{display:none}}
+@media print{.pz{display:none!important}}
+
+/* v161 Setlist: feste Reihenfolge, Blattzoom, Anfasser-Pille mittig im sichtbaren Bereich */
+#spwrap{position:relative}
+.pz b{top:var(--pzc,calc(50vh - 22px))!important}
+@media (min-width:900px){
+#setv .sgrid{column-gap:26px;align-items:start}
+#setv .pzr{right:-15px;width:14px}
+#setv .pzr b{margin:0 0 0 auto}
+@media (max-width:1200px){#setv .pzr{right:-12px;width:12px}#setv .pzr b{margin:0 auto}}
+#setv .sgrid>.pane{position:sticky;top:calc(var(--tbb,0px) + var(--gap,15px));max-height:calc(100vh - var(--tbb,0px) - 2*var(--gap,15px));overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--muted) 45%,transparent) transparent}
+}
+
+/* v164 Anfasser-Pille folgt der Maus entlang des Randes */
+.pz b{position:absolute!important;top:calc(var(--py,50%) - 22px)!important;left:50%;margin:0 0 0 -2px!important}
+#setv .pzr b{left:auto!important;right:0;margin:0!important}
+@media (max-width:1200px){#setv .pzr b{left:50%!important;right:auto;margin:0 0 0 -2px!important}}
+.gl-rs::after{top:var(--py,50%)!important}
+
+/* v165 Sheet/Setlist/Gig: eigener Scrollbalken nur unterhalb der Werkzeugleiste */
+html.nosb{scrollbar-width:none}
+html.nosb::-webkit-scrollbar{display:none}
+#vsb{position:fixed;right:27px;width:10px;z-index:40;display:none;touch-action:none}
+html.nosb #vsb,html.vsbon #vsb{display:block}
+#vsb i{position:absolute;left:2px;right:2px;top:0;border-radius:6px;background:color-mix(in srgb,var(--muted) 55%,transparent);opacity:0;transition:opacity .25s,background .2s;cursor:pointer}
+#vsb.on i,#vsb:hover i,#vsb.drag i{opacity:1}
+#vsb:hover i,#vsb.drag i{background:var(--chord)}
+@media (max-width:899px){#vsb{display:none!important}}
+@media print{#vsb{display:none!important}}
+
+
+/* v169 Sheet: kein Rahmen um die Werkzeugleiste, Abstand nach unten bleibt (margin-bottom = --gap) */
+:root[data-theme] body #sheetv>.stool,:root[data-theme] body #setv>.stool,:root[data-theme] body #gigv>.gbar{box-shadow:var(--edge)!important}
+
+/* v174 Sheet/Setlist: Kopfzeile (Reiter + Werkzeugleiste) fest, Flächen darunter scrollen in sich */
+.pz{--pw:calc(var(--gap) - 1px)}
+#sheetv .pzr,#setv .pzr{right:calc(-1*var(--gap));width:var(--pw)}
+#sheetv .pzl,#setv .pzl{left:calc(-1*var(--gap));width:var(--pw)}
+#sheetv .pzr b,#setv .pzr b{left:auto!important;right:0;margin:0!important}
+#sheetv .pzl b,#setv .pzl b{left:0!important;right:auto;margin:0!important}
+@media (min-width:900px){
+html.nopg,html.nopg body{overflow:hidden!important}
+html.nopg #sheetv:not([hidden]),html.nopg #setv:not([hidden]){height:var(--svh,calc(100vh - 200px));display:flex;flex-direction:column;overflow:visible}
+html.nopg #sheetv>.stool,html.nopg #setv>.stool{position:relative!important;top:auto!important;flex:none;max-height:46vh!important;overflow:auto!important;scrollbar-width:thin}
+html.nopg #sheetv>.stool::after,html.nopg #setv>.stool::after{display:none!important}
+html.nopg #vscrS{flex:1;min-height:0;overflow:auto;margin:0 calc(-1*var(--gap));padding:0 var(--gap) var(--gap);scrollbar-width:none;overscroll-behavior:contain}
+html.nopg #vscrS::-webkit-scrollbar,html.nopg #spcol::-webkit-scrollbar{display:none}
+html.nopg #setv .sgrid{flex:1;min-height:0;grid-template-rows:minmax(0,1fr);align-items:stretch}
+html.nopg #setv .sgrid>.pane{position:static;height:auto;max-height:none;min-height:0;overflow:hidden;margin-bottom:0;display:flex;flex-direction:column}
+html.nopg #setv .sgrid>.pane>.ph3,html.nopg #setv .sgrid>.pane>.hint{flex:none}
+html.nopg #setv .sgrid>.pane>#slist{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;margin:0 -14px;padding:0 14px;scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--muted) 45%,transparent) transparent}
+html.nopg #spcol{min-height:0;height:100%;overflow:auto;margin:0 calc(-1*var(--gap));padding:0 var(--gap) var(--gap);scrollbar-width:none;overscroll-behavior:contain}
+}
+
+/* v175 Gig: gleiche Logik, Seitenschatten des Blatts eng genug für den Rand der Fläche */
+@media (min-width:900px){
+html.nopg #gigv:not([hidden]){height:var(--svh,calc(100vh - 200px));display:flex;flex-direction:column;overflow:visible}
+html.nopg #gigv>.gbar{position:relative!important;top:auto!important;flex:none;max-height:46vh!important;overflow:auto!important;scrollbar-width:thin}
+html.nopg #vscrG{flex:1;min-height:0;overflow:auto;margin:0 calc(-1*var(--gap));padding:0 var(--gap);scrollbar-width:none;overscroll-behavior:contain}
+html.nopg #vscrG::-webkit-scrollbar{display:none}
+html.nopg #gwrap{margin:0}
+html.nopg #vscrS{padding-bottom:0}
+html.nopg #spcol{padding-bottom:0}
+html.nopg #pg.pg,html.nopg #spg.pg{box-shadow:-1.5px -1.5px 0 rgba(255,255,255,.3),0 3px 10px rgba(0,0,0,.45)!important}
+:root[data-theme="light"] html.nopg #pg.pg,html.nopg:root[data-theme="light"] #pg.pg,html.nopg:root[data-theme="light"] #spg.pg{box-shadow:-1.5px -1.5px 0 #fff,1px 1px 0 rgba(38,51,47,.12),0 3px 10px rgba(38,51,47,.22)!important}
+}
+
+/* v177 unterer Fensterrand = oberer Fensterrand (Abstand der Reiterleiste), für alle festen Elemente */
+@media (min-width:900px){
+#side{height:calc(100dvh - 2*(var(--gap) + 15px))!important}
+#editv{height:calc(100dvh - var(--hh,82px) - 2*var(--gap) - 15px)!important}
+}
+
+
+/* v180 Logo: Hover-Ebene (.lf) auch im hellen Modus in Signalfarbe */
+:root[data-theme="light"] #sidelogo .lf g,:root[data-theme="dark"] #sidelogo .lf g{stroke:var(--chord)!important;filter:drop-shadow(0 0 6px color-mix(in srgb,var(--chord) 45%,transparent))!important}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) #sidelogo .lf g{stroke:var(--chord)!important;filter:drop-shadow(0 0 6px color-mix(in srgb,var(--chord) 45%,transparent))!important}}
+
+/* v181 Logo-Grundfarbe = Rahmenfarbe */
+#sidelogo .lb g{stroke:var(--frame)!important}
+
+/* v182 Bibliothek-Anfasser: größere Pille mit Signal-Leuchtring und Breitenanzeige */
+#rz::after{left:50%!important;top:var(--py,50%)!important;bottom:auto!important;width:6px!important;height:56px;margin:-28px 0 0 -3px;border-radius:6px;background:var(--line);opacity:0;transition:opacity .2s,background .2s,box-shadow .2s}
+#rz:hover::after,#rz.on::after,#rz:focus-visible::after{opacity:1;background:var(--chord)!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--chord) 24%,transparent),0 0 16px color-mix(in srgb,var(--chord) 50%,transparent)}
+
+/* v184 Logo bündig mit dem rechten Inhaltsrand, bei schmaler Bibliothek ausgeblendet */
+@media (min-width:900px){#sidelogo{right:0!important;transition:opacity .2s,--lr 1.15s cubic-bezier(.3,.6,.2,1)}}
+#side.slim #sidelogo{opacity:0;pointer-events:none}
 </style>
 </head>
 <body>
-<div class="app"><aside id="side" aria-label="Bibliothek"><h2>Bibliothek</h2><div class="row"><button class="go" id="dnew">+ Song</button><button id="dfold">+ Ordner</button></div><div class="row"><input id="lq" placeholder="Suchen…" aria-label="Bibliothek durchsuchen" style="flex:1;min-width:0"><select id="lsort" hidden aria-label="Sortierung"><option value="manual">Eigene</option><option value="name-desc">Name Z–A</option><option value="name">Name</option><option value="recent">Zuletzt</option></select><div class="seg" id="lseg" role="group" aria-label="Sortierung"></div></div>
-<div id="lib"></div><div id="bkw"><details class="bk" id="bkd"><summary>Sichern</summary><div class="row"><button id="bsong" title="Den aktuellen Song als Datei speichern">Song</button><button id="bfold" title="Den Ordner des aktuellen Songs mit allen Songs als Datei speichern">Ordner</button><button id="blib" title="Die gesamte Bibliothek mit allen Ordnern als Datei speichern">Bibliothek</button></div><p class="hint" id="smsg">Speichert Song, Ordner oder die ganze Bibliothek als Datei.</p></details><details class="bk" id="bimd"><summary>Importieren</summary><div class="row"><button id="bimp" title="Eine gesicherte Datei einlesen">Datei wählen</button></div><input type="file" id="bfile" accept=".json,application/json" hidden><div id="bchoice" class="row" hidden><button class="go" id="badd">Hinzufügen</button><button id="brep" title="Achtung: ersetzt die gesamte Bibliothek in diesem Browser">Alles ersetzen</button><button id="bcan" aria-label="Abbrechen" title="Abbrechen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><p class="hint" id="bmsg">Liest eine mit „Sichern“ gespeicherte Datei ein.</p></details><div id="ver" title="Programmversion"></div></div></aside><div id="rz" role="separator" aria-orientation="vertical" aria-label="Breite der Bibliothek ändern" tabindex="0" title="Ziehen, um die Breite zu ändern (Doppelklick: zurücksetzen)"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="gl-lens" x="0" y="0" width="1" height="1" color-interpolation-filters="sRGB"><feImage href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='x' x1='0' x2='1' y1='0' y2='0'%3E%3Cstop offset='0' stop-color='%23f00'/%3E%3Cstop offset='.14' stop-color='%23800'/%3E%3Cstop offset='.86' stop-color='%23800'/%3E%3Cstop offset='1' stop-color='%230000'/%3E%3C/linearGradient%3E%3ClinearGradient id='y' x1='0' x2='0' y1='0' y2='1'%3E%3Cstop offset='0' stop-color='%2300f'/%3E%3Cstop offset='.14' stop-color='%23008'/%3E%3Cstop offset='.86' stop-color='%23008'/%3E%3Cstop offset='1' stop-color='%23000'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' fill='%23808080'/%3E%3Crect width='100' height='100' fill='url%28%23x%29' style='mix-blend-mode:screen'/%3E%3Crect width='100' height='100' fill='url%28%23y%29' style='mix-blend-mode:screen'/%3E%3C/svg%3E" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="m"/><feDisplacementMap in="SourceGraphic" in2="m" scale="30" xChannelSelector="R" yChannelSelector="B"/></filter></svg><div class="app"><aside id="side" aria-label="Bibliothek"><button id="sideclose" aria-label="Bibliothek ausblenden" aria-expanded="true">☰</button><div id="sidelogo" aria-hidden="true"><svg class="lb" viewBox="0 0 512 512"><g fill="none" stroke-linecap="round" stroke-linejoin="round" transform="translate(0 -32)"><path d="M345 150A112 112 0 1 0 368 236H282" stroke-width="42"/><path d="M144 434H368" stroke-width="38"/></g></svg><svg class="lf" viewBox="0 0 512 512"><g fill="none" stroke-linecap="round" stroke-linejoin="round" transform="translate(0 -32)"><path d="M345 150A112 112 0 1 0 368 236H282" stroke-width="42"/><path d="M144 434H368" stroke-width="38"/></g></svg></div><h2>Bibliothek</h2><div class="row"><button class="go" id="dnew">+ Song</button><button id="dfold">+ Ordner</button></div><div class="row"><input id="lq" placeholder="Suchen…" aria-label="Bibliothek durchsuchen" style="flex:1;min-width:0"><select id="lsort" hidden aria-label="Sortierung"><option value="manual">Eigene</option><option value="name-desc">Name Z–A</option><option value="name">Name</option><option value="recent">Zuletzt</option></select><div class="seg" id="lseg" role="group" aria-label="Sortierung"></div></div>
+<div id="lib"></div><div id="bkw"><details class="bk" id="bkd"><summary>Sichern</summary><div class="row"><button id="bsong" title="Den aktuellen Song als Datei speichern">Song</button><button id="bfold" title="Den Ordner des aktuellen Songs mit allen Songs als Datei speichern">Ordner</button><button id="blib" title="Die gesamte Bibliothek mit allen Ordnern als Datei speichern">Bibliothek</button></div><p class="hint" id="smsg">Speichert Song, Ordner oder die ganze Bibliothek als Datei.</p></details><details class="bk" id="bimd"><summary>Importieren</summary><div class="row"><button id="bimp" title="Eine gesicherte Datei einlesen">Datei wählen</button></div><input type="file" id="bfile" accept=".json,application/json" hidden><div id="bchoice" class="row" hidden><button class="go" id="badd">Hinzufügen</button><button id="brep" title="Achtung: ersetzt die gesamte Bibliothek in diesem Browser">Alles ersetzen</button><button id="bcan" aria-label="Abbrechen" title="Abbrechen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><p class="hint" id="bmsg">Liest eine mit „Sichern“ gespeicherte Datei ein.</p></details><span id="sst" class="sst">Gespeichert</span><div id="verw"><button id="verbtn" type="button" aria-label="Info zu GigSheet" aria-describedby="verpop"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6M12 7.4v.2" stroke-width="2.4"/></svg></button><div id="verpop" role="tooltip"><b>GigSheet</b><span id="verv"></span><span id="verd"></span></div></div></div></aside><div id="rz" role="separator" aria-orientation="vertical" aria-label="Breite der Bibliothek ändern" tabindex="0" title="Ziehen, um die Breite zu ändern (Doppelklick: zurücksetzen)"></div>
 <main>
-<div class="top"><div class="hrow"><button id="sidebtn" aria-label="Bibliothek ein- oder ausblenden" aria-expanded="true">☰</button><h1 class="brand"><svg class="logo" viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="112" fill="var(--bg)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="var(--chord)"><path d="M345 150A112 112 0 1 0 368 236H282" stroke-width="42"/><path d="M150 398H362" stroke-width="24"/></g></svg><span>Gig<b>Sheet</b></span></h1><span id="curname" class="curname"></span></div>
-<div class="tabs"><button id="tabT" aria-pressed="false">Text</button><button id="tabE" aria-pressed="true">Editor</button><button id="tabS" aria-pressed="false">Blatt (A4)</button><button id="tabL" aria-pressed="false">Setlist</button><button id="tabG" aria-pressed="false">Gig</button></div><div class="tright"><span id="sst" class="sst">Gespeichert</span><button id="tbtn" aria-label="Werkzeugleiste ein- oder ausblenden" aria-pressed="true" title="Werkzeugleiste ein-/ausblenden"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2.5" width="12" height="11" rx="2.5"/><path d="M2 6.5h12"/></svg></button><button id="thm" aria-label="Darstellung umschalten"></button></div></div>
+<div class="top"><button id="sidebtn" aria-label="Bibliothek einblenden" aria-expanded="true">☰</button><div class="hrow"><h1 class="brand"><span>GigSheet</span></h1><span id="curname" class="curname"></span></div>
+<div class="tabs"><button id="tabT" aria-pressed="false">Import</button><button id="tabE" aria-pressed="true">Edit</button><button id="tabS" aria-pressed="false">Sheet</button><button id="tabL" aria-pressed="false">Setlist</button><button id="tabG" aria-pressed="false">Gig</button></div><div class="tright"><button id="tbtn" aria-label="Werkzeugleiste ein- oder ausblenden" aria-pressed="true" title="Werkzeugleiste ein-/ausblenden"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2.5" width="12" height="11" rx="2.5"/><path d="M2 6.5h12"/></svg></button><button id="hfull" type="button" aria-label="Vollbild" title="Vollbild ein- oder ausschalten" hidden></button><button id="thm" aria-label="Darstellung umschalten"></button></div></div>
 <div id="textv">
 <div id="inp">
-<div class="row tbar"><button id="tun" title="Rückgängig (Strg+Z)" aria-label="Text-Änderung rückgängig machen">↶</button><button id="tre" title="Wiederholen (Strg+Y)" aria-label="Text-Änderung wiederholen">↷</button><button id="tclr" class="mini" data-fd="" title="Löscht den gesamten Text und alle Akkorde dieses Songs">Alles löschen</button><span class="info" tabindex="0" role="button" aria-label="Hinweise zum Text-Reiter"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10.2"/><path d="M12 10.2v7M12 6.4v.2" stroke-width="2.6"/></svg><span class="tip" role="tooltip">Hier fügst du deinen Text ein und änderst ihn jederzeit. Änderungen gelten sofort im Editor und im Blatt, gesetzte Akkorde bleiben erhalten. Überschriften wie [Strophe 1] oder „Refrain:“ werden als Abschnitt erkannt. Ein Abschnitt ohne Text (z. B. ein zweiter „Refrain“) wird im Blatt automatisch mit Text und Akkorden des ersten gefüllt.</span></span></div>
+<div class="row tbar"><button id="tun" title="Rückgängig (Strg+Z)" aria-label="Text-Änderung rückgängig machen">↶</button><button id="tre" title="Wiederholen (Strg+Y)" aria-label="Text-Änderung wiederholen">↷</button><button id="tclr" class="mini" data-fd="" title="Löscht den gesamten Text und alle Akkorde dieses Songs">Alles löschen</button><span class="info" tabindex="0" role="button" aria-label="Hinweise zum Import-Reiter"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10.2"/><path d="M12 10.2v7M12 6.4v.2" stroke-width="2.6"/></svg><span class="tip" role="tooltip">Hier fügst du deinen Text ein und änderst ihn jederzeit. Änderungen gelten sofort im Edit-Reiter und im Sheet, gesetzte Akkorde bleiben erhalten. Überschriften wie [Strophe 1] oder „Refrain:“ werden als Abschnitt erkannt. Ein Abschnitt ohne Text (z. B. ein zweiter „Refrain“) wird im Sheet automatisch mit Text und Akkorden des ersten gefüllt.</span></span></div>
 <button class="tcol" type="button" aria-label="Werkzeuge ein- oder ausklappen" title="Werkzeuge ein-/ausklappen"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l5-5 5 5"/></svg></button>
 <div class="help imp" id="impbox"><div class="ih">Text mit Akkorden einlesen <span>Ultimate Guitar, ChordPro · wird hinten angefügt</span></div><textarea id="ugsrc" placeholder="Akkorde über dem Text einfügen, z. B.
 [Verse 1]
 Am        F
 Hello darkness my old friend"></textarea><div class="row"><button class="go" id="ugdo">Einlesen</button><span class="hint" id="ugmsg"></span></div></div>
-<textarea id="src" placeholder="Lyrics hier einfügen. Zeilen wie [Strophe 1] oder „Refrain:“ werden als Abschnitt erkannt."></textarea>
+<div class="wk"><textarea id="src" placeholder="Lyrics hier einfügen. Zeilen wie [Strophe 1] oder „Refrain:“ werden als Abschnitt erkannt."></textarea><div class="gl-rs" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Breite des Arbeitsfelds ändern" title="Ziehen: Breite ändern · Doppelklick: volle Breite"></div><aside class="gl" id="glT" aria-label="Gliederung"></aside></div>
 
 </div>
 </div>
@@ -512,7 +988,7 @@ Hello darkness my old friend"></textarea><div class="row"><button class="go" id=
 <div class="grp g-key"><span class="ur"><button id="und">Rückgängig</button><button id="red">Wiederholen</button></span><div class="row">
 <div class="kf"><span>Original</span><div class="row"><select id="okey" aria-label="Originale Tonart des Songs"></select><select id="omode" aria-label="Dur oder Moll des Originals"><option value="0">Dur</option><option value="1">Moll</option></select></div></div>
 <span class="karrow" aria-hidden="true">→</span>
-<div class="kf"><span>Gespielt (für Blatt und Setlist)</span><div class="row"><select id="key" aria-label="Gespielte Tonart"></select><select id="mode" aria-label="Dur oder Moll"><option value="0">Dur</option><option value="1">Moll</option></select><button id="tdn" aria-label="Einen Halbton tiefer" title="Einen Halbton tiefer transponieren">−1</button><button id="tup" aria-label="Einen Halbton höher" title="Einen Halbton höher transponieren">+1</button></div></div>
+<div class="kf"><span>Gespielt (für Sheet und Setlist)</span><div class="row"><select id="key" aria-label="Gespielte Tonart"></select><select id="mode" aria-label="Dur oder Moll"><option value="0">Dur</option><option value="1">Moll</option></select><button id="tdn" aria-label="Einen Halbton tiefer" title="Einen Halbton tiefer transponieren">−1</button><button id="tup" aria-label="Einen Halbton höher" title="Einen Halbton höher transponieren">+1</button></div></div>
 <span id="kdelta" class="kdelta"></span></div></div>
 <div class="grp g-chord"><h3 title="Zahl zweimal schnell = 7er-Akkord, Zahl und dann 2 = sus2, Zahl und dann 4 = sus4">Akkord setzen<br>Taste 1–7</h3><div class="row"><div id="degs" class="row"></div><input id="cust" size="10" placeholder="Eigener Akkord" aria-label="Eigener Akkord"><span id="sfx" class="row"></span><input id="bin" size="4" placeholder="Bass" aria-label="Basston eingeben, mit Enter bestätigen"><button id="bno">ohne</button></div></div>
 </div>
@@ -527,9 +1003,10 @@ Hello darkness my old friend"></textarea><div class="row"><button class="go" id=
 </div>
 <div class="grid">
 <div class="pane"><div class="ed" id="ed"></div>
-<details class="help"><summary>Bedienung und Tastenkürzel</summary><p class="hint">Klick auf eine Stelle im Text setzt den Cursor. Tasten 1–7 setzen den Akkord der Tonleiter (schnell zweimal: 7er-Akkord, danach 2 oder 4: sus2 oder sus4), ←/→ bewegen den Cursor (mit Shift wortweise), ↑/↓ wechseln die Zeile, Backspace entfernt den Akkord. Tab springt zum nächsten Wort (Shift+Tab zurück). Akkorde lassen sich per Ziehen verschieben, die grauen Felder vor und hinter dem Text nehmen auch mehrere Akkorde ohne Text auf. Enter oder Doppelklick bearbeitet die Zeile, ein Klick auf eine Überschrift ebenfalls. Den Text änderst du im Reiter „Text“, die Akkorde wandern dabei mit. Mit „+ Akkordzeile“ fügst du eine Zeile nur für Akkorde ein (z. B. Intro): Zeile anklicken, dann Akkorde per Button oder Taste 1–7 nacheinander einfügen. ←/→ wählt einen Akkord aus, neue Akkorde kommen dahinter.</p></details></div>
+<details class="help"><summary>Bedienung und Tastenkürzel</summary><p class="hint">Klick auf eine Stelle im Text setzt den Cursor. Tasten 1–7 setzen den Akkord der Tonleiter (schnell zweimal: 7er-Akkord, danach 2 oder 4: sus2 oder sus4), ←/→ bewegen den Cursor (mit Shift wortweise), ↑/↓ wechseln die Zeile, Backspace entfernt den Akkord. Tab springt zum nächsten Wort (Shift+Tab zurück). Akkorde lassen sich per Ziehen verschieben, die grauen Felder vor und hinter dem Text nehmen auch mehrere Akkorde ohne Text auf. Enter oder Doppelklick bearbeitet die Zeile, ein Klick auf eine Überschrift ebenfalls. Den Text änderst du im Reiter „Import“, die Akkorde wandern dabei mit. Mit „+ Akkordzeile“ fügst du eine Zeile nur für Akkorde ein (z. B. Intro): Zeile anklicken, dann Akkorde per Button oder Taste 1–7 nacheinander einfügen. ←/→ wählt einen Akkord aus, neue Akkorde kommen dahinter.</p></details></div>
 <div class="pane" hidden><h2>Ergebnis</h2><textarea id="out" readonly></textarea>
 <p class="row"><button class="go" id="copy">Kopieren</button><span class="hint" id="msg"></span></p></div>
+<div class="gl-rs" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Breite des Arbeitsfelds ändern" title="Ziehen: Breite ändern · Doppelklick: volle Breite"></div><aside class="gl" id="glE" aria-label="Gliederung"></aside>
 </div>
 </div>
 <section id="sheetv" hidden>
@@ -548,7 +1025,7 @@ Hello darkness my old friend"></textarea><div class="row"><button class="go" id=
 <label class="f">Rand<select id="mar"><option value="8">8 mm</option><option value="12" selected>12 mm</option><option value="18">18 mm</option></select></label>
 <label class="f"><span>Absatz <span id="gv"></span></span><input type="range" id="gap" min="0" max="2" step="0.1" value="0.7" aria-label="Abstand vor der nächsten Überschrift"></label>
 <label class="f"><span>Zeilenabstand <span id="lv"></span></span><input type="range" id="ls" min="0" max="1.5" step="0.1" value="0" aria-label="Zusätzlicher Abstand zwischen den Zeilen, z. B. für Notizen"></label>
-<label class="f"><span><input type="checkbox" id="auto" checked> Auto-Größe <span id="fsv"></span></span><input type="range" id="fs" min="6" max="24" step="0.25" value="12" aria-label="Schriftgröße"></label>
+<label class="f"><span><input type="checkbox" id="auto" checked> Auto-Größe <span id="fsv"></span><i class="fw" id="fitwarn" tabindex="0" role="img" aria-label="Passt nicht auf eine Seite">!</i></span><input type="range" id="fs" min="6" max="24" step="0.25" value="12" aria-label="Schriftgröße"></label>
 </div></div>
 <div class="grp"><h3>Darstellung</h3><div class="row">
 <label class="tg hlp" title="Refrain farbig hinterlegen"><input type="checkbox" id="hl" checked> Refrain hervorheben</label>
@@ -561,10 +1038,10 @@ Hello darkness my old friend"></textarea><div class="row"><button class="go" id=
 <button type="button" id="clnk" class="lnk" aria-pressed="false" aria-label="Farben verknüpfen" title="Farben verknüpfen: Ändert man eine Farbe, folgt die andere im gleichen Verhältnis"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4.5 4.5 0 006.4 0l3-3a4.5 4.5 0 00-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 00-6.4 0l-3 3a4.5 4.5 0 006.4 6.4l1-1"/></svg></button>
 <label class="f inl">Refrainfarbe<span class="row2"><input type="color" id="hlc" value="#ffc83d" aria-label="Farbe des Refrains"><input type="range" id="hlo" min="0" max="100" value="30" aria-label="Deckkraft des Refrains"></span></label>
 </div></div>
-<div class="grp act"><button id="bun">↶</button><button id="bre">↷</button><button id="sdef" title="Speichert Farben, Layout und Refrain-Einstellungen als Vorgabe für neue Dokumente">Als Standard speichern</button><button class="go" id="prn">PDF speichern</button><span class="hint" id="fitmsg"></span></div>
+<div class="grp act"><button id="bun">↶</button><button id="bre">↷</button><button class="go" id="prn">PDF speichern</button><button id="sdef" title="Speichert Farben, Layout und Refrain-Einstellungen als Vorgabe für neue Dokumente">Als Standard speichern</button><span class="hint" id="fitmsg"></span></div>
 <button class="tcol" type="button" aria-label="Werkzeuge ein- oder ausklappen" title="Werkzeuge ein-/ausklappen"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l5-5 5 5"/></svg></button>
 </div>
-<div id="pgwrap"><div class="pg" id="pg"><div id="ph"></div><div id="pb"></div></div></div>
+<div id="vscrS"><div id="pgwrap"><div class="pz pzl" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Blattgröße ändern" title="Ziehen: Größe ändern · Strg + Scrollen: zoomen · Doppelklick: zurücksetzen"><b></b></div><div class="pz pzr" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Blattgröße ändern" title="Ziehen: Größe ändern · Strg + Scrollen: zoomen · Doppelklick: zurücksetzen"><b></b></div><div class="pg" id="pg"><div id="ph"></div><div id="pb"></div></div></div></div>
 </section>
 <section id="setv" hidden>
 <div class="bar stool">
@@ -590,7 +1067,7 @@ Hello darkness my old friend"></textarea><div class="row"><button class="go" id=
 </div>
 <div class="sgrid">
 <div class="pane"><h3 class="ph3">Reihenfolge</h3><div id="slist"></div><p class="hint">Am Griff ziehen oder die Pfeile nutzen. Titel und Tonart kannst du hier für die Setlist überschreiben, der Schalter nimmt einen Song heraus.</p></div>
-<div id="spcol"><div id="spwrap"><div class="pg" id="spg"><div id="sph"></div><div id="spb"></div></div></div></div>
+<div id="spcol"><div id="spwrap"><div class="pz pzl" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Blattgröße ändern" title="Ziehen: Größe ändern · Strg + Scrollen: zoomen · Doppelklick: zurücksetzen"><b></b></div><div class="pz pzr" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Blattgröße ändern" title="Ziehen: Größe ändern · Strg + Scrollen: zoomen · Doppelklick: zurücksetzen"><b></b></div><div class="pg" id="spg"><div id="sph"></div><div id="spb"></div></div></div></div>
 </div>
 </section>
 <section id="gigv" hidden>
@@ -600,11 +1077,11 @@ Hello darkness my old friend"></textarea><div class="row"><button class="go" id=
 <button id="gnext" class="gnav" aria-label="Nächster Song" title="Nächster Song (Pfeil rechts)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
 <div class="gz"><button id="gsm" aria-label="Schrift kleiner" title="Schrift kleiner">A&minus;</button><button id="gbg" aria-label="Schrift größer" title="Schrift größer">A+</button></div>
 <div class="gz"><button id="gtm" aria-label="Einen Halbton tiefer" title="Einen Halbton tiefer transponieren">T&minus;</button><button id="gtp" aria-label="Einen Halbton höher" title="Einen Halbton höher transponieren">T+</button></div>
-<button id="gfull" type="button" class="gic" aria-label="Vollbild" title="Vollbild ein- oder ausschalten"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+
 <button class="tcol" type="button" aria-label="Werkzeuge ein- oder ausklappen" title="Werkzeuge ein-/ausklappen"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l5-5 5 5"/></svg></button>
 <div class="row gx grow2"><label class="tg"><input type="checkbox" id="gcols"> 2 Spalten</label><label class="tg" title="Akkorde als römische Stufenzahlen zur Tonart"><input type="checkbox" id="gnash"> Nashville</label><label class="tg" title="Nur Text, ohne Akkorde"><input type="checkbox" id="gnc"> Ohne Akkorde</label><span id="gwl" class="gwl" hidden>Bildschirm bleibt an</span></div>
 </div>
-<div id="gwrap"><div id="ghd"></div><div id="gpb"></div></div>
+<div id="vscrG"><div id="gwrap"><div id="ghd"></div><div id="gpb"></div></div></div>
 </section>
 <div id="toast" role="status" aria-live="polite"></div>
 </main></div>
@@ -620,7 +1097,12 @@ const $=id=>document.getElementById(id);
 let st={lines:[],cur:{l:0,c:0},key:0,minor:0,edit:null},last={l:-1,c:-1,t:0};
 const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const isCho=h=>/(?<!pre[-\s]?|vor[-\s]?)(chorus|refrain)/i.test(h||'');
-const isSecT=t=>/^\s*\[.+\]\s*$/.test(t)||/^\s*(intro|verse|strophe|chorus|refrain|pre-?chorus|bridge|outro|solo|interlude)\s*\d*\s*:?\s*$/i.test(t);
+const isSecT=t=>/^\s*\[.+\]\s*$/.test(t)||/^\s*(intro|verse|vers|strophe|chorus|refrain|pre[- ]?chorus|bridge|outro|solo|interlude|zwischenspiel|instrumental)\s*\d*\s*:?\s*$/i.test(t)||/^\s*#(pc|i|s|r|b|o)\s*\d*\s*$/i.test(t);
+const SECAB={pc:'Pre-Chorus',i:'Intro',s:'Strophe',r:'Refrain',b:'Bridge',o:'Outro'};
+const secNorm=t=>{const m=/^\s*#(pc|i|s|r|b|o)\s*(\d*)\s*$/i.exec(t);return m?SECAB[m[1].toLowerCase()]+(m[2]?' '+m[2]:''):t};
+const VRE=/^(\s*\[?\s*)(strophe|verse|vers)(\s*\d*)(\s*:?\s*\]?\s*)$/i;
+function numberVerses(){if(st.edit!==null)return;const L=st.lines,ix=[];L.forEach((X,i)=>{if(X.sec&&VRE.test(X.t))ix.push(i)});if(ix.length<2)return;
+ix.forEach((i,k)=>{const m=VRE.exec(L[i].t);L[i].t=m[1]+m[2]+' '+(k+1)+m[4].replace(/^\s+(?=[:\]])/,'')})}
 const isText=L=>!L.sec&&!L.co&&L.t.trim()!=='';
 const nav=L=>isText(L)||L.co;
 function relayout(L){let p=0;L.ch.forEach(c=>{c.pos=p;p+=c.name.length+2});L.t=L.ch.map(c=>c.name).join('  ')}
@@ -658,8 +1140,8 @@ document.addEventListener('click',e=>{if(menu&&!e.target.closest('.dmenu,.dm')){
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu){menu=null;renderLib()}});
 function arm(id,fn){if(armDel===id){armDel=null;fn()}else{armDel=id;renderLib();setTimeout(()=>{if(armDel===id){armDel=null;renderLib()}},3000)}}
 function commitRen(ok){const e=$('lib').querySelector('.rn');if(!e||ren===null)return;const id=ren;ren=null;if(ok){const v=e.value.trim(),o=lib.docs.find(d=>d.id===id)||lib.folders.find(f=>f.id===id);if(o&&v){o.name=v;if(lib.docs.includes(o))syncTitle(o,v)}wr(LK,lib)}renderLib()}
-function setSide(o){document.body.classList.toggle('noside',!o);$('sidebtn').setAttribute('aria-expanded',o);try{localStorage.setItem('cs_side',o?'1':'0')}catch(e){}}
-const APP_VERSION='96',APP_DATE='18.11.2026';
+function setSide(o){document.body.classList.toggle('noside',!o);$('sidebtn').setAttribute('aria-expanded',o);$('sideclose').setAttribute('aria-expanded',o);try{localStorage.setItem('cs_side',o?'1':'0')}catch(e){}}
+const APP_VERSION='184',APP_DATE='20.11.2026';
 function curFolder(){const a=lib&&lib.docs.find(d=>d.id===lib.active);return a&&a.folder&&lib.folders.some(f=>f.id===a.folder)?a.folder:null}
 
 function tabGate(){const b=$('tabL');if(!b)return;const ok=!!curFolder();b.classList.toggle('dis',!ok);b.setAttribute('aria-disabled',ok?'false':'true');b.title=ok?'':'Diese Funktion ist erst verfügbar, wenn ein Song in einem Ordner liegt.';if(!ok&&view==='set')show('edit')}
@@ -790,7 +1272,8 @@ const over=()=>cols>1?pb.scrollWidth>pb.clientWidth+2:pb.scrollHeight>pb.clientH
 let v;$('sh_fs').disabled=$('sh_auto').checked;
 if($('sh_auto').checked){let lo=7,hi=26;set(lo);if(over())v=lo;else{for(let i=0;i<9;i++){const m=(lo+hi)/2;set(m);if(over())hi=m;else lo=m}v=Math.floor(lo*4)/4}$('sh_fs').value=v}else v=+$('sh_fs').value;
 set(v);$('sh_fsv').textContent=v.toFixed(2).replace(/0$/,'')+' pt';$('sh_msg').textContent=over()?'Passt nicht auf eine Seite: kleinere Schrift oder 2 Spalten wählen.':''}
-function sscale(){$('spwrap').style.setProperty('--sc',Math.min(1,($('spcol').clientWidth-2)/793.7).toFixed(4))}
+function spw(){const c=$('spcol'),cs=getComputedStyle(c);return c.clientWidth-(parseFloat(cs.paddingRight)||0)-(parseFloat(cs.paddingLeft)||0)-2}
+function sscale(){const f=spw()/793.7;$('spwrap').style.setProperty('--sc',(SZ2?Math.min(SZ2,f):Math.min(1,f)).toFixed(4))}
 [...SS_IDS,...SS_CK].forEach(i=>{$(i).addEventListener('input',()=>{sSnap();setPage()});$(i).addEventListener('change',()=>{sSnap();setPage()})});
 $('sh_src').addEventListener('change',()=>{sSnap(true);setlist(true)});$('sh_load').onclick=()=>setlist(true);
 $('slist').addEventListener('input',e=>{sSnap();const d=e.target.dataset;if(d.st!==undefined)sset.items[+d.st].ttl=e.target.value;else if(d.sk!==undefined)sset.items[+d.sk].key=e.target.value;else return;setPage()});
@@ -842,11 +1325,12 @@ async function getD(){if(window.claude){try{return await window.claude.use('down
 try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e){}
 if('serviceWorker' in navigator&&/^https?:/.test(location.protocol)){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 const SWK='cs_sw';
-function setSW(w,keep){w=Math.max(200,Math.min(520,Math.round(w)));document.documentElement.style.setProperty('--sw',w+'px');if(!keep)try{localStorage.setItem(SWK,String(w))}catch(e){}return w}
+function setSW(w,keep){w=Math.max(200,Math.min(520,Math.round(w)));document.documentElement.style.setProperty('--sw',w+'px');{const sd=document.getElementById('side');if(sd)sd.classList.toggle('slim',w<232)}if(!keep)try{localStorage.setItem(SWK,String(w))}catch(e){}return w}
 try{const w=+localStorage.getItem(SWK);if(w)setSW(w,true)}catch(e){}
+addEventListener('load',()=>{try{const sd=$('side');sd.classList.toggle('slim',sd.getBoundingClientRect().width<232)}catch(e){}});
 let rzg=null;
 $('rz').addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button!==0)return;rzg=true;$('rz').classList.add('on');document.body.classList.add('rzing');try{$('rz').setPointerCapture(e.pointerId)}catch(x){}e.preventDefault()});
-$('rz').addEventListener('pointermove',e=>{if(rzg)setSW(e.clientX-$('side').getBoundingClientRect().left,true)});
+$('rz').addEventListener('pointermove',e=>{if(rzg){let w=e.clientX-$('side').getBoundingClientRect().left;if(Math.abs(w-272)<9)w=272;setSW(w,true)}});
 const rzend=()=>{if(!rzg)return;rzg=null;$('rz').classList.remove('on');document.body.classList.remove('rzing');setSW($('side').getBoundingClientRect().width)};
 $('rz').addEventListener('pointerup',rzend);$('rz').addEventListener('pointercancel',rzend);
 $('rz').addEventListener('dblclick',()=>setSW(272));
@@ -888,10 +1372,10 @@ IC.sun=ic('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1
 function applyTheme(t){document.documentElement.setAttribute('data-theme',t);$('thm').innerHTML=t==='dark'?IC.sun:IC.moon;$('thm').title=t==='dark'?'Hell darstellen':'Dunkel darstellen';try{localStorage.setItem('cs_theme',t)}catch(e){}}
 $('thm').onclick=()=>applyTheme(document.documentElement.getAttribute('data-theme')==='light'?'dark':'light');
 {const ap=on=>{document.body.classList.toggle('notools',!on);$('tbtn').setAttribute('aria-pressed',on);0};let on=true;try{on=localStorage.getItem('cs_tools')!=='0'}catch(e){}ap(on);document.querySelectorAll('.tcol').forEach(b=>b.addEventListener('click',()=>$('tbtn').click()));$('tbtn').onclick=()=>{on=!on;ap(on);try{localStorage.setItem('cs_tools',on?'1':'0')}catch(e){}}
-{let hv=null;const bgT=t=>t.closest&&t.closest('#inp,.tools,.stool,.gbar')&&!t.closest('button,input,select,textarea,label,a,summary,details,.hint,datalist');
+{let hv=null;const bgT=t=>t.closest&&t.closest('#inp,.tools,.stool,.gbar')&&!t.closest('button,input,select,textarea,label,a,summary,details,.hint,datalist,.gl-rs,.gl,.wk');
 document.addEventListener('mousemove',e=>{const c=bgT(e.target)?e.target.closest('#inp,.tools,.stool,.gbar'):null;if(c!==hv){if(hv)hv.classList.remove('bgh');hv=c;if(hv)hv.classList.add('bgh')}});
 document.addEventListener('mouseleave',()=>{if(hv){hv.classList.remove('bgh');hv=null}})}
-document.addEventListener('click',e=>{const t=e.target;if(!t.closest||!t.closest('#inp,.tools,.stool,.gbar'))return;if(t.closest('button,input,select,textarea,label,a,summary,details,.hint,datalist'))return;const sl=window.getSelection&&String(window.getSelection());if(sl)return;$('tbtn').click()})}
+document.addEventListener('click',e=>{const t=e.target;if(!t.closest||!t.closest('#inp,.tools,.stool,.gbar'))return;if(t.closest('button,input,select,textarea,label,a,summary,details,.hint,datalist,.gl-rs,.gl,.wk'))return;const sl=window.getSelection&&String(window.getSelection());if(sl)return;$('tbtn').click()})}
 {let t='dark';try{t=localStorage.getItem('cs_theme')||'dark'}catch(e){}applyTheme(t)}
 function syncTitle(d,v){if(d.id===lib.active)$('ttl').value=v;else{const x=rd(PK+d.id);if(x){x.sheet=Object.assign({},x.sheet||{},{ttl:v});wr(PK+d.id,x)}}const it=(sset.items||[]).find(o=>o.id===d.id);if(it)it.ttl='';wr(SETK,sset);if(d.id===lib.active)save()}
 $('curname').title='Doppelklick zum Umbenennen';
@@ -899,7 +1383,7 @@ $('curname').addEventListener('dblclick',()=>{const d=lib.docs.find(x=>x.id===li
 c.innerHTML='<input id="cnin" class="cnin" aria-label="Songtitel">';const i=$('cnin');i.value=d.name;i.focus();i.select();let done=false;
 const fin=ok=>{if(done)return;done=true;const v=i.value.trim();if(ok&&v&&v!==d.name){d.name=v;syncTitle(d,v);wr(LK,lib);if(view==='sheet')sheet();if(view==='set')setlist(true)}renderLib()};
 i.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();fin(true)}else if(e.key==='Escape')fin(false)};i.onblur=()=>fin(true)});
-$('sidebtn').innerHTML=ic('<path d="M4 7h16M4 12h16M4 17h16"/>',20);
+$('sidebtn').innerHTML=$('sideclose').innerHTML=ic('<path d="M4 7h16M4 12h16M4 17h16"/>',20);
 {const seg=$('lseg'),I={manual:'<path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/>',name:'<path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="M20 8h-5"/><path d="M15 10V6.5a2.5 2.5 0 0 1 5 0V10"/><path d="M15 14h5l-5 6h5"/>',recent:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'},T={manual:'Eigene Reihenfolge',name:'Nach Name (A–Z)',recent:'Zuletzt geöffnet'};
 seg.innerHTML=Object.keys(I).map(k=>`<button data-k="${k}" title="${T[k]}" aria-label="${T[k]}">${ic(I[k],17)}</button>`).join('');
 const ZA='<path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="M15 4h5l-5 6h5"/><path d="M15 20v-3.5a2.5 2.5 0 0 1 5 0V20"/><path d="M20 18h-5"/>';
@@ -907,32 +1391,32 @@ const upd=()=>{const v=$('lsort').value;seg.querySelectorAll('button').forEach(b
 seg.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const k=b.dataset.k,cur=$('lsort').value;$('lsort').value=k==='name'?(cur==='name'?'name-desc':'name'):k;$('lsort').dispatchEvent(new Event('change'));upd()});upd()}
 let lastQ=null;
 if(window.ResizeObserver)new ResizeObserver(()=>document.documentElement.style.setProperty('--dockh',$('dock').offsetHeight+'px')).observe($('dock'));
-$('dnew').onclick=()=>newDoc(null);$('dfold').onclick=newFolder;$('sidebtn').onclick=()=>setSide(document.body.classList.contains('noside'));
+$('dnew').onclick=()=>newDoc(null);$('dfold').onclick=newFolder;$('sidebtn').onclick=()=>setSide(document.body.classList.contains('noside'));$('sideclose').onclick=()=>setSide(false);
 $('sdef').onclick=()=>{const o={},c=sheetCfg();STYLE_KEYS.forEach(k=>o[k]=c[k]);wr(DK,o);$('fitmsg').textContent='Als Standard für neue Dokumente gespeichert.';setTimeout(()=>{$('fitmsg').textContent=''},3000)};
 
 function firstCur(){const i=st.lines.findIndex(isText);st.cur={l:Math.max(i,0),c:0}}
-function load(){st.edit=null;st.lines=$('src').value.replace(/\r/g,'').split('\n').map(t=>({t:t.replace(/\s+$/,''),ch:[],sec:isSecT(t)}));firstCur();$('inp').open=false;render()}
+function load(){st.edit=null;st.lines=$('src').value.replace(/\r/g,'').split('\n').map(t=>{t=secNorm(t.replace(/\s+$/,''));return{t,ch:[],sec:isSecT(t)}});firstCur();$('inp').open=false;render()}
 function build(){return st.lines.map(L=>{if(!isText(L)||!L.ch.length)return L.t;let cl='';[...L.ch].sort((a,b)=>a.pos-b.pos).forEach(c=>{if(cl.length&&cl.length>=c.pos)cl+=' ';else cl=cl.padEnd(c.pos,' ');cl+=c.name});return cl+'\n'+L.t}).join('\n')}
 function render(){
-let h='';
+numberVerses();let h='';const GH=ghosts();
 st.lines.forEach(L=>{if(L.co)relayout(L)});const bs0=bStart(st.cur.l);
 {const X=st.lines[st.cur.l];if(X&&X.co&&st.cur.c>=0&&!X.ch.some(c=>c.pos===st.cur.c))st.cur.c=-1}
 st.lines.forEach((L,i)=>{
 const ed=st.edit===i,inp=`<input class="le" id="le" value="${esc(L.t)}" style="width:${Math.max(L.t.length+4,14)}ch" autocomplete="off" spellcheck="false">`;
-if(L.sec){h+=ed?`<div class="sec">${inp}</div>`:`<div class="sec${i===bs0?' on':''}" data-i="${i}">${esc(L.t)}</div>`;return}
+if(L.sec){h+=ed?`<div class="sec">${inp}</div>`:`<div class="sec${i===bs0?' on':''}" data-i="${i}">${esc(L.t)}${GH.sg[i]?`<span class="sg" data-sg="${i}" title="Alle vorgeschlagenen Akkorde dieses Teils übernehmen">Akkorde aus „${esc(GH.sg[i])}“ übernehmen</span>`:''}</div>`;return}
 if(L.co){const sel=st.cur.l===i;
 h+=ed?`<div class="ln co">${inp}</div>`:`<div class="ln co${sel?' sel':''}" data-co="${i}" data-ln="${i}"><div class="cr">${L.ch.length?L.ch.map(c=>`<span class="ch${sel&&st.cur.c===c.pos?' cur':''}" style="left:${c.pos}ch" data-l="${i}" data-c="${c.pos}">${esc(c.name)}</span>`).join(''):'<span class="hint" style="margin:0;line-height:1.9em">Akkordzeile: Zeile anklicken, dann Akkord wählen</span>'}</div></div>`;return}
 if(!isText(L)){h+='<div class="blank"></div>';return}
-h+=`<div class="ln" data-ln="${i}"><div class="cr">${L.ch.map(c=>`<span class="ch" style="left:${c.pos+G}ch" data-l="${i}" data-c="${c.pos}">${esc(c.name)}</span>`).join('')}</div>`;if(ed)h+=inp;else{h+='<div class="tx">';
+h+=`<div class="ln" data-ln="${i}"><div class="cr">${L.ch.map(c=>`<span class="ch" style="left:${c.pos+G}ch" data-l="${i}" data-c="${c.pos}">${esc(c.name)}</span>`).join('')}${(GH.m[i]||[]).map(c=>`<span class="gh" style="left:${c.pos+G}ch" data-gl="${i}" data-gp="${c.pos}" title="Klicken: Akkord übernehmen · Ziehen: an andere Stelle setzen">${esc(c.name)}</span>`).join('')}</div>`;if(ed)h+=inp;else{h+='<div class="tx">';
 for(let k=-G;k<L.t.length+T;k++){const cur=st.cur.l===i&&st.cur.c===k,x=k<0?' g':k>=L.t.length?' t':'';h+=`<span class="c${x}${cur?' cur':''}" data-l="${i}" data-c="${k}">${k>=0&&k<L.t.length?esc(L.t[k]):' '}</span>`}
 h+='</div>'}h+='</div>'});
-$('ed').innerHTML=h||'<p class="hint">Noch kein Text. Füge ihn im Reiter „Text“ ein.</p>';
+$('ed').innerHTML=h||'<p class="hint">Noch kein Text. Füge ihn im Reiter „Import“ ein.</p>';
 $('degs').innerHTML=diat().map((n,i)=>`<button class="deg" data-d="${i}"><b>${esc(n)}</b><small>${i+1} · ${SC[st.minor].r[i]}</small></button>`).join('');
 
 {const H=st.lines[bStart(st.cur.l)],X=st.lines[st.cur.l],cc=!!(X&&X.co);
 $('blkl').textContent=H&&H.sec?'Teil „'+H.t.replace(/^\s*\[|\]\s*$/g,'').replace(/:\s*$/,'')+'“':'Teil';
 ['lup','ldn','ldel'].forEach(i=>$(i).disabled=!cc);$('bup').disabled=$('bdn').disabled=$('bcp').disabled=$('bdel').disabled=!st.lines.length}
-updKeyUI();fillSrc();$('out').value=build();save();$('und').disabled=!undoS.length;$('red').disabled=!redoS.length;
+updKeyUI();fillSrc();$('out').value=build();try{glE()}catch(e){}save();$('und').disabled=!undoS.length;$('red').disabled=!redoS.length;
 if(st.edit!==null){const e=$('le');if(e){e.focus();const p=st.cur.l===st.edit&&st.cur.c>=0?st.cur.c:e.value.length;e.setSelectionRange(p,p)}}}
 function put(name){const L=st.lines[st.cur.l];if(!L||!name||(!isText(L)&&!L.co))return;snap();
 if(L.co){const x=L.ch.findIndex(c=>c.pos===st.cur.c),at=x<0?L.ch.length:x+1;L.ch.splice(at,0,{name,pos:0});relayout(L);st.cur.c=L.ch[at].pos;render();return}
@@ -942,9 +1426,9 @@ if(strict&&p+s<m*0.5)return null;const d=n.length-o.length;
 return ch.map(c=>{let q=c.pos;if(q<0)return {...c};if(q>=o.length)return {...c,pos:q+d};if(q>=o.length-s)q+=d;else if(q>p)q=p;return {...c,pos:Math.max(0,Math.min(n.length,q))}})}
 function startEdit(i){endEdit(true);const L=st.lines[i];if(!L)return;st.edit=i;if(L.co)st.cur={l:i,c:-1};else if(isText(L))st.cur={l:i,c:Math.min(st.cur.l===i?st.cur.c:L.t.length,L.t.length)};render()}
 function endEdit(ok){if(st.edit===null)return;const i=st.edit,L=st.lines[i],e=$('le');st.edit=null;
-if(ok&&e&&L){const t=e.value.replace(/\s+$/,'');if(L.co){L.ch=t.split(/\s+/).filter(Boolean).map(name=>({name,pos:0}));st.cur.c=-1}else if(t!==L.t){L.ch=L.sec?[]:remap(L.t,t,L.ch);L.t=t;L.sec=isSecT(t);if(L.sec||!t.trim())L.ch=[]}}
+if(ok&&e&&L){const t=secNorm(e.value.replace(/\s+$/,''));if(L.co){L.ch=t.split(/\s+/).filter(Boolean).map(name=>({name,pos:0}));st.cur.c=-1}else if(t!==L.t){L.ch=L.sec?[]:remap(L.t,t,L.ch);L.t=t;L.sec=isSecT(t);if(L.sec||!t.trim())L.ch=[]}}
 const X=st.lines[st.cur.l];if(X&&isText(X))st.cur.c=Math.min(st.cur.c,X.t.length);render()}
-function applyText(){undoS=[];redoS=[];st.edit=null;const nt=$('src').value.replace(/\r/g,'').split('\n').map(t=>t.replace(/\s+$/,'')),old=st.lines;
+function applyText(){undoS=[];redoS=[];st.edit=null;const nt=$('src').value.replace(/\r/g,'').split('\n').map(t=>secNorm(t.replace(/\s+$/,''))),old=st.lines;
 let a=0;while(a<old.length&&a<nt.length&&old[a].t===nt[a])a++;
 let b=0;while(b<old.length-a&&b<nt.length-a&&old[old.length-1-b].t===nt[nt.length-1-b])b++;
 const res=old.slice(0,a),om=old.slice(a,old.length-b);let ptr=0;
@@ -1030,6 +1514,7 @@ function dend(){removeEventListener('pointermove',dmove);removeEventListener('po
 const d=drag;drag=null;if(!d||!d.go)return;
 noClick=true;setTimeout(()=>{noClick=false},150);d.g.remove();if(d.mark)d.mark.classList.remove('drop');
 if(!d.t)return;const S=st.lines[d.l],T=st.lines[d.t.i];snap();
+if(d.gh){T.ch=T.ch.filter(c=>c.pos!==d.t.pos);T.ch.push({name:d.name,pos:d.t.pos});const hb=st.lines[bStart(d.t.i)];if(hb&&hb.sec)hb.sg=1;st.cur={l:d.t.i,c:d.t.pos};render();return}
 const k=S.ch.findIndex(c=>c.pos===d.p);if(k<0){undoS.pop();return}
 const m=S.ch.splice(k,1)[0];
 if(S.co){S.ch.splice(d.t.idx,0,m);relayout(S);st.cur={l:d.t.i,c:m.pos}}
@@ -1087,12 +1572,13 @@ if(!b.h&&!b.l.length)return '';
 return `<div class="blk">${b.h?`<div class="sh">${esc(b.h)}</div>`:''}${b.l.map(sline).join('')}</div>`}).join('')}
 function fit(){const pg=$('pg'),pb=$('pb'),ph=$('ph'),cols=+$('cols').value,cs=getComputedStyle(pg);
 const set=v=>{pg.style.setProperty('--fs',v+'pt');pb.style.height=(pg.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom)-ph.offsetHeight)+'px'};
-const over=()=>cols>1?pb.scrollWidth>pb.clientWidth+2:pb.scrollHeight>pb.clientHeight+2;
-let v;$('fs').disabled=$('auto').checked;
+const over=()=>pb.scrollWidth>pb.clientWidth+2||pb.scrollHeight>pb.clientHeight+2;
+let v;$('fs').disabled=false;
 if($('auto').checked){let lo=6,hi=16;set(lo);if(over())v=lo;else{for(let i=0;i<9;i++){const m=(lo+hi)/2;set(m);if(over())hi=m;else lo=m}v=Math.floor(lo*4)/4}$('fs').value=v}else v=+$('fs').value;
 set(v);$('fsv').textContent=v.toFixed(2).replace(/0$/,'')+' pt';
-$('fitmsg').textContent=over()?'Passt nicht auf eine Seite: Schrift verkleinern oder 2 Spalten wählen.':''}
-function scale(){$('pgwrap').style.setProperty('--sc',Math.min(1,($('sheetv').clientWidth-2)/793.7).toFixed(4))}
+{const ov=over(),w=$('fitwarn');clearTimeout(fit.t);if(!ov)w.classList.remove('on');else fit.t=setTimeout(()=>w.classList.add('on'),1500);w.dataset.tip=$('auto').checked?'Passt auch in der kleinsten Schrift nicht auf eine Seite. 2 Spalten wählen oder den Text kürzen.':'Passt nicht auf eine Seite. Schrift verkleinern, Auto-Größe nutzen oder 2 Spalten wählen.';w.setAttribute('aria-label',w.dataset.tip);if(!ov&&/Passt nicht/.test($('fitmsg').textContent))$('fitmsg').textContent=''}}
+var SZ=null,SZ2=null;try{SZ=parseFloat(localStorage.getItem('cs_sz'))||null;SZ2=parseFloat(localStorage.getItem('cs_sz2'))||null}catch(e){}
+function scale(){const f=($('sheetv').clientWidth-2)/793.7;$('pgwrap').style.setProperty('--sc',(SZ?Math.min(SZ,f):Math.min(1,f)).toFixed(4))}
 function sheet(){const pg=$('pg'),pb=$('pb'),g=id=>$(id).value;
 pg.style.setProperty('--m',g('mar')+'mm');pg.style.fontFamily=SF[g('ffam')];pg.style.setProperty('--hs',g('hs'));pg.style.setProperty('--cc',g('ccol'));pg.style.setProperty('--gap',g('gap')+'em');$('gv').textContent=g('gap')+' em';pg.style.setProperty('--ls',g('ls')+'em');$('lv').textContent=g('ls')+' em';
 {const h=g('hlc'),a=+g('hlo')/100;pg.style.setProperty('--hlbg',`rgba(${parseInt(h.slice(1,3),16)},${parseInt(h.slice(3,5),16)},${parseInt(h.slice(5,7),16)},${a})`)}
@@ -1248,7 +1734,7 @@ try{Object.assign(gigCfg,JSON.parse(localStorage.getItem('cs_gig')||'{}'))}catch
 const gigSave=()=>{try{localStorage.setItem('cs_gig',JSON.stringify(gigCfg))}catch(e){}};
 function gigEnter(){const f=curFolder();if(f){setlist(2);gigIds=sset.items.filter(o=>o.on).map(o=>o.id).filter(id=>(lib.docs.find(d=>d.id===id)||{}).folder===f)}else{let a=lib.docs.filter(d=>!lib.folders.some(x=>x.id===d.folder));if(libsort==='name'||libsort==='name-desc'){a=[...a].sort((x,y)=>x.name.localeCompare(y.name,'de'));if(libsort==='name-desc')a.reverse()}else if(libsort==='recent')a=[...a].sort((x,y)=>(y.t||0)-(x.t||0));gigIds=a.map(d=>d.id)}
 $('gcols').checked=!!gigCfg.cols;$('gnash').checked=!!gigCfg.nash;$('gnc').checked=!!gigCfg.nc;
-$('gfull').hidden=!document.documentElement.requestFullscreen;gigRender();gigWake(true)}
+gigRender();gigWake(true)}
 function gigRender(){const g=id=>$(id).value,root=$('gwrap');
 const key=g('tkey').trim()||nm(st.key)+(st.minor?'m':''),bp=g('bpm').trim(),sg=g('sig').trim(),name=(lib.docs.find(d=>d.id===lib.active)||{}).name||'',t=g('ttl').trim()||name,a=g('art').trim();
 const meta=[origTxt(),bp&&bp+' BPM',sg&&'Takt '+sg].filter(Boolean);
@@ -1267,23 +1753,219 @@ ln.querySelectorAll('.sg>.cn').forEach(c=>{const r=c.parentNode.getBoundingClien
 const gap=parseFloat(getComputedStyle(ln).fontSize)*0.35;
 Object.values(rows).forEach(a=>{a.sort((p,q)=>p[1]-q[1]);let pr=-1e9;a.forEach(([c,l,w])=>{const x=Math.max(l,pr+gap);if(x>l)c.style.left=(x-l)+'px';pr=x+w})})})}
 function gigGo(d){const N=gigIds.length,i=gigIds.indexOf(lib.active);if(!N)return;const n=i<0?(d>0?0:N-1):(i+d+N)%N;
-gigNav=true;try{openDoc(gigIds[n])}finally{gigNav=false}gigRender();window.scrollTo({top:0})}
+gigNav=true;try{openDoc(gigIds[n])}finally{gigNav=false}gigRender();window.scrollTo({top:0});{const g=$('vscrG');if(g)g.scrollTop=0}}
 $('gtm').onclick=()=>{transpose(-1);save();gigRender()};$('gtp').onclick=()=>{transpose(1);save();gigRender()};
 $('gprev').onclick=()=>gigGo(-1);$('gnext').onclick=()=>gigGo(1);
 $('gsm').onclick=()=>{gigCfg.fs=Math.max(10,gigCfg.fs-2);gigSave();gigRender()};$('gbg').onclick=()=>{gigCfg.fs=Math.min(64,gigCfg.fs+2);gigSave();gigRender()};
 $('gcols').onchange=e=>{gigCfg.cols=e.target.checked?1:0;gigSave();gigRender()};$('gnash').onchange=e=>{gigCfg.nash=e.target.checked;gigSave();gigRender()};$('gnc').onchange=e=>{gigCfg.nc=e.target.checked;gigSave();gigRender()};
-$('gfull').onclick=()=>{try{const d=document;if(d.fullscreenElement)d.exitFullscreen();else d.documentElement.requestFullscreen().catch(()=>{})}catch(e){}};
+{const hf=$('hfull'),IN='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>',OUT='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>';
+const upd=()=>{const on=!!document.fullscreenElement;hf.innerHTML=on?OUT:IN;hf.title=on?'Vollbild beenden':'Vollbild';hf.setAttribute('aria-label',hf.title)};
+hf.hidden=!document.documentElement.requestFullscreen;upd();document.addEventListener('fullscreenchange',upd);
+hf.onclick=()=>{try{const d=document;if(d.fullscreenElement)d.exitFullscreen();else d.documentElement.requestFullscreen().catch(()=>{})}catch(e){}}}
 async function gigWake(on){try{if(on){if(navigator.wakeLock&&!wl){wl=await navigator.wakeLock.request('screen');wl.addEventListener('release',()=>{wl=null;if($('gwl'))$('gwl').hidden=true})}}else if(wl){await wl.release();wl=null}}catch(e){}if($('gwl'))$('gwl').hidden=!wl}
 document.addEventListener('visibilitychange',()=>{if(view==='gig'&&document.visibilityState==='visible')gigWake(true)});
 document.addEventListener('keydown',e=>{if(view!=='gig'||/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)||e.ctrlKey||e.metaKey||e.altKey)return;
 if(e.key==='ArrowRight'){e.preventDefault();gigGo(1)}else if(e.key==='ArrowLeft'){e.preventDefault();gigGo(-1)}
+else{const S=window.nopOn&&window.nopOn()?$('vscrG'):null;
+if(S){const st=S.clientHeight*.9,end=S.scrollTop+S.clientHeight>=S.scrollHeight-4;
+if(e.key==='PageDown'||e.key===' '&&!e.shiftKey){e.preventDefault();if(end)gigGo(1);else S.scrollBy({top:st,behavior:'smooth'})}
+else if(e.key==='PageUp'||e.key===' '&&e.shiftKey){e.preventDefault();if(S.scrollTop<=2)gigGo(-1);else S.scrollBy({top:-st,behavior:'smooth'})}
+else if(e.key==='ArrowDown'){e.preventDefault();S.scrollBy({top:80})}else if(e.key==='ArrowUp'){e.preventDefault();S.scrollBy({top:-80})}
+else if(e.key==='Home'){e.preventDefault();S.scrollTop=0}else if(e.key==='End'){e.preventDefault();S.scrollTop=S.scrollHeight}}
 else if(e.key==='PageDown'&&innerHeight+scrollY>=document.documentElement.scrollHeight-4){e.preventDefault();gigGo(1)}
-else if(e.key==='PageUp'&&scrollY<=2){e.preventDefault();gigGo(-1)}});
+else if(e.key==='PageUp'&&scrollY<=2){e.preventDefault();gigGo(-1)}}});
 
 sLoad();
 restore();$('key').value=st.key;$('mode').value=st.minor;render();$('src').value=st.lines.map(L=>L.t).join('\n');ssInit();renderLib();{let s=null;try{s=localStorage.getItem('cs_side')}catch(e){}setSide(s==null?innerWidth>=900:s==='1')}show(st.lines.length?'edit':'text');
-try{const v=$('ver');if(v)v.textContent='GigSheet · Version '+APP_VERSION+' · '+APP_DATE}catch(e){}
+try{$('verv').textContent='Version '+APP_VERSION;$('verd').textContent='Veröffentlicht am '+APP_DATE}catch(e){}
 try{tabInd(true)}catch(e){}
+try{const L=$('sidelogo');if(L){const at=e=>{const r=L.getBoundingClientRect();L.style.setProperty('--mx',(e.clientX-r.left)+'px');L.style.setProperty('--my',(e.clientY-r.top)+'px')};L.addEventListener('pointerenter',e=>{at(e);L.classList.add('on')});L.addEventListener('pointerleave',e=>{at(e);L.classList.remove('on')})}}catch(e){}
+try{const sc=()=>document.body.classList.toggle('scrolled',(window.scrollY||document.documentElement.scrollTop)>24);addEventListener('scroll',sc,{passive:true});sc()}catch(e){}
+try{const T=document.querySelector('.top'),sh=()=>document.documentElement.style.setProperty('--hh',T.offsetHeight+'px');sh();addEventListener('resize',sh);if(window.ResizeObserver)new ResizeObserver(sh).observe(T);document.fonts&&document.fonts.ready.then(sh)}catch(e){}
+
+/* Gliederung als Revolver-Trommel */
+var GL={};
+function glTitle(t){return secNorm(t).replace(/^\s*\[|\]\s*$/g,'').replace(/:\s*$/,'').trim()||'Teil'}
+const glCnt=c=>c+(c===1?' Zeile':' Zeilen');
+function glDrum(root){
+root.innerHTML='<div class="gl-hd"><h3>Gliederung</h3><span class="gl-n"></span></div><div class="gl-win" role="listbox" tabindex="0" aria-label="Gliederung, Pfeiltasten wechseln den Teil"><div class="gl-notch"></div><div class="gl-drum"></div><p class="gl-empty hint" hidden>Noch keine Teile. Zeilen wie [Strophe 1] oder „Refrain:“ werden als Teil erkannt.</p></div><div class="gl-ft"><button type="button" data-s="-1" aria-label="Vorheriger Teil" title="Vorheriger Teil">▲</button><button type="button" data-s="1" aria-label="Nächster Teil" title="Nächster Teil">▼</button></div>';
+const win=root.querySelector('.gl-win'),dr=root.querySelector('.gl-drum'),n=root.querySelector('.gl-n'),em=root.querySelector('.gl-empty');
+const o={items:[],a:0,key:'',pick:null,
+set(items,a){const key=items.map(x=>x.t+'\u0001'+x.s).join('\u0002');
+if(key!==o.key){o.key=key;dr.innerHTML=items.map((x,k)=>`<div class="gl-it" role="option" data-k="${k}"><i></i><b>${esc(x.t)}</b><small>${esc(x.s)}</small></div>`).join('')}
+o.items=items;o.a=a;em.hidden=items.length>0;n.textContent=items.length?(a+1)+' / '+items.length:'';
+[...dr.children].forEach((el,k)=>{const d=k-a,ad=Math.abs(d);el.style.setProperty('--d',Math.max(-4,Math.min(4,d)));el.style.setProperty('--o',ad>3?0:[1,.72,.38,.12][ad]);el.classList.toggle('on',d===0);el.setAttribute('aria-selected',d===0);el.style.pointerEvents=ad>3?'none':''})},
+step(s){const k=Math.max(0,Math.min(o.items.length-1,o.a+s));if(k!==o.a&&o.pick)o.pick(k)}};
+dr.addEventListener('click',e=>{const it=e.target.closest('.gl-it');if(it&&o.pick)o.pick(+it.dataset.k)});
+root.querySelector('.gl-ft').addEventListener('click',e=>{const b=e.target.closest('button');if(b)o.step(+b.dataset.s)});
+win.addEventListener('keydown',e=>{if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();o.step(1)}else if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();o.step(-1)}});
+let wl=0;win.addEventListener('wheel',e=>{if(o.items.length<2)return;e.preventDefault();const t=Date.now();if(t-wl<150)return;wl=t;o.step(e.deltaY>0?1:-1)},{passive:false});
+return o}
+function glE(){const o=GL.E;if(!o)return;const L=st.lines,items=[];
+L.forEach((X,i)=>{if(X.sec){let c=0;for(let j=i+1;j<L.length&&!L[j].sec;j++)if(isText(L[j]))c++;items.push({t:glTitle(X.t),s:glCnt(c),i})}});
+const b=bStart(st.cur.l);o.set(items,Math.max(0,items.findIndex(x=>x.i===b)))}
+function glT(){const o=GL.T,s=$('src');if(!o||!s||$('textv').hidden)return;const ls=s.value.replace(/\r/g,'').split('\n'),items=[];
+ls.forEach((t,i)=>{if(isSecT(t)){let c=0;for(let j=i+1;j<ls.length&&!isSecT(ls[j]);j++)if(ls[j].trim())c++;items.push({t:glTitle(t),s:glCnt(c),i})}});
+{const vi=items.filter(x=>/^(strophe|verse|vers)\s*\d*$/i.test(x.t));if(vi.length>1)vi.forEach((x,k)=>{x.t=x.t.replace(/\s*\d*$/,'')+' '+(k+1)})}
+const ln=GL.Tline||0;let a=-1;items.forEach((x,k)=>{if(x.i<=ln)a=k});o.set(items,Math.max(0,a))}
+try{GL.E=glDrum($('glE'));GL.T=glDrum($('glT'));
+GL.E.pick=k=>{const it=GL.E.items[k];if(!it)return;endEdit(true);const L=st.lines;let j=it.i+1;while(j<L.length&&!L[j].sec&&!nav(L[j]))j++;setCur(j<L.length&&!L[j].sec?j:it.i);render();
+const el=$('ed').querySelector('.sec[data-i="'+it.i+'"]');if(el)el.scrollIntoView({block:'start',behavior:'smooth'})};
+GL.T.pick=k=>{const it=GL.T.items[k],s=$('src');if(!it)return;const ls=s.value.split('\n');let off=0;for(let j=0;j<it.i;j++)off+=ls[j].length+1;
+s.focus({preventScroll:true});s.setSelectionRange(off,off);GL.Tline=it.i;GL.lock=Date.now()+800;const lh=parseFloat(getComputedStyle(s).lineHeight)||21;
+s.scrollTo({top:Math.max(0,it.i*lh-12),behavior:'smooth'});glT()};
+const sr=$('src'),cl=()=>{GL.Tline=sr.value.slice(0,sr.selectionStart).split('\n').length-1;glT()};
+['click','keyup','focus'].forEach(ev=>sr.addEventListener(ev,cl));sr.addEventListener('input',cl);
+sr.addEventListener('scroll',()=>{if(Date.now()<(GL.lock||0))return;const lh=parseFloat(getComputedStyle(sr).lineHeight)||21;GL.Tline=Math.floor(sr.scrollTop/lh)+1;glT()});
+const _sh=show;show=function(v){_sh(v);try{glT();glE()}catch(e){}};
+setInterval(()=>{if(view==='text')glT()},700);glE();glT()}catch(e){console.error('Gliederung',e)}
+
+/* Breite des Arbeitsfelds per Ziehen ändern (bleibt zentriert) */
+try{const R=document.documentElement,MIN=460,MAX=1300;let w=0;try{w=+localStorage.getItem('cs_pw2')||0}catch(e){}
+const clamp=(v,m)=>Math.max(MIN,Math.min(Math.min(MAX,m||MAX),Math.round(v)));
+if(w)R.style.setProperty('--paneW',clamp(w)+'px');
+const save=v=>{try{if(v)localStorage.setItem('cs_pw2',String(v));else localStorage.removeItem('cs_pw2')}catch(e){}},rst=()=>{R.style.removeProperty('--paneW');save(0)};
+document.querySelectorAll('.gl-rs').forEach(h=>{const host=h.parentElement,pane=()=>host.querySelector('.pane:not([hidden]),#src');
+h.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button!==0)return;e.preventDefault();{const t=Date.now();if(t-(h._t||0)<380){h._t=0;rst();return}h._t=t}h.setPointerCapture(e.pointerId);
+const gl=host.querySelector('.gl'),x0=e.clientX,w0=(pane()||h).getBoundingClientRect().width,pr=(pane()||h).getBoundingClientRect(),mx=gl?host.clientWidth-gl.offsetWidth-(gl.getBoundingClientRect().left-pr.right):MAX;
+let cur=w0,raf=0;R.classList.add('gl-drag');h.classList.add('on');
+const apply=()=>{raf=0;host.style.setProperty('--paneW',cur+'px')};
+const mv=ev=>{cur=clamp(w0+2*(ev.clientX-x0),mx);if(!raf)raf=requestAnimationFrame(apply)};
+const up=()=>{h.removeEventListener('pointermove',mv);h.removeEventListener('pointerup',up);h.removeEventListener('pointercancel',up);if(raf)cancelAnimationFrame(raf);
+R.style.setProperty('--paneW',cur+'px');host.style.removeProperty('--paneW');R.classList.remove('gl-drag');h.classList.remove('on');save(cur)};
+h.addEventListener('pointermove',mv);h.addEventListener('pointerup',up);h.addEventListener('pointercancel',up)});
+h.addEventListener('dblclick',rst);
+h.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();const c=(pane()||h).getBoundingClientRect().width,v=clamp(c+(e.key==='ArrowRight'?24:-24));R.style.setProperty('--paneW',v+'px');save(v)}})})}catch(e){console.error('Breite',e)}
+
+/* Akkord-Vorschläge: gleiche Wortstruktur wie ein Teil mit Akkorden */
+function ghosts(){const L=st.lines,m={},sg={},bl=[];
+L.forEach((X,i)=>{if(X.sec)bl.push({s:i,e:bEnd(i)})});
+const tl=b=>{const r=[];for(let i=b.s+1;i<b.e;i++)if(isText(L[i]))r.push(i);return r};
+const has=b=>{for(let i=b.s+1;i<b.e;i++)if(L[i].ch&&L[i].ch.length)return true;return false};
+const base=t=>glTitle(t).toLowerCase().replace(/[\d\s.:-]+$/,'').replace(/[^a-zäöüß]/g,'').replace(/^(verse|vers)$/,'strophe').replace(/^chorus$/,'refrain');
+bl.forEach((B,bi)=>{if(has(B)&&!L[B.s].sg)return;const bt=tl(B);if(!bt.length)return;
+const bw=bt.map(i=>wst(L[i].t).length),btot=bw.reduce((a,b)=>a+b,0);let best=null;
+bl.forEach((A,ai)=>{if(A===B||!has(A)||base(L[A.s].t)!==base(L[B.s].t))return;const at=tl(A);if(!at.length)return;
+const dl=Math.abs(at.length-bt.length);if(dl>Math.max(1,Math.ceil(bt.length*.3)))return;
+let wd=0;for(let k=0;k<Math.min(at.length,bt.length);k++)wd+=Math.abs(wst(L[at[k]].t).length-bw[k]);
+if(wd>Math.max(3,Math.ceil(btot*.4)))return;
+const sc=(base(L[A.s].t)===base(L[B.s].t)?0:100)+dl*5+wd+Math.abs(ai-bi)/100+(ai>bi?.5:0);if(!best||sc<best.sc)best={A,at,sc}});
+if(!best)return;const A=best.A,at=best.at;let any=false;
+bt.forEach((i,k)=>{const S=L[at[k]];if(!S||!S.ch.length)return;const T={t:L[i].t,ch:[]};mapCh(S,T);T.ch=T.ch.filter(c=>!L[i].ch.some(x=>x.name===c.name&&x.pos===c.pos)&&!(L[B.s].sg&&L[i].ch.some(x=>x.name===c.name)));if(T.ch.length){m[i]=T.ch;any=true}});
+if(any)sg[B.s]=glTitle(L[A.s].t)});
+return{m,sg}}
+function ghAdd(i,pos,name){const L=st.lines[i];if(!L)return;L.ch=L.ch.filter(c=>c.pos!==pos);L.ch.push({name,pos});const hb=st.lines[bStart(i)];if(hb&&hb.sec)hb.sg=1}
+$('ed').addEventListener('click',e=>{const a=e.target.closest('.sg');if(a){e.stopPropagation();e.preventDefault();const s=+a.dataset.sg,G2=ghosts();snap();let n=0;for(let i=s+1;i<bEnd(s);i++)(G2.m[i]||[]).forEach(c=>{ghAdd(i,c.pos,c.name);n++});if(!n){undoS.pop();return}st.lines[s].sg=1;render();return}
+const g=e.target.closest('.gh');if(!g)return;e.stopPropagation();e.preventDefault();if(noClick){noClick=false;return}
+const i=+g.dataset.gl,pos=+g.dataset.gp;snap();ghAdd(i,pos,g.textContent);st.cur={l:i,c:pos};render()},true);
+$('ed').addEventListener('pointerdown',e=>{const c=e.target.closest('.gh');if(!c||st.edit!==null||(e.pointerType==='mouse'&&e.button!==0))return;
+const r=c.getBoundingClientRect();drag={l:+c.dataset.gl,p:+c.dataset.gp,gh:1,ox:e.clientX-r.left,sx:e.clientX,sy:e.clientY,go:false,name:c.textContent,t:null,mark:null,g:null};
+addEventListener('pointermove',dmove,{passive:false});addEventListener('pointerup',dend);addEventListener('pointercancel',dend)});
+
+/* Liquid-Glass-Auswahlmenü für alle select-Felder (Desktop, Maus) */
+(function(){try{
+if(!matchMedia('(hover:hover) and (pointer:fine)').matches)return;
+let pop=null,sel=null,act=-1,items=[],tq='',tt=0;
+const close=(fo)=>{if(!pop)return;const s=sel;pop.remove();pop=null;sel=null;items=[];document.removeEventListener('pointerdown',away,true);removeEventListener('resize',close);removeEventListener('blur',close);document.removeEventListener('scroll',sc,true);if(fo&&s)s.focus({preventScroll:true})};
+const away=e=>{if(pop&&!pop.contains(e.target)&&e.target!==sel)close()};
+const sc=e=>{if(pop&&!pop.contains(e.target))close()};
+const mark=i=>{act=i;items.forEach((it,k)=>it.el.classList.toggle('act',k===i));if(items[i])items[i].el.scrollIntoView({block:'nearest'})};
+const commit=i=>{const it=items[i];if(!it||!sel)return;const s=sel,v=it.o.value;close(true);if(s.value!==v){s.value=v;s.dispatchEvent(new Event('input',{bubbles:true}));s.dispatchEvent(new Event('change',{bubbles:true}))}};
+function open(s){close();sel=s;const fr=s.getBoundingClientRect(),cs=getComputedStyle(s);
+pop=document.createElement('div');pop.className='gpop';pop.setAttribute('role','listbox');items=[];
+const add=(o,par)=>{if(o.hidden)return;const b=document.createElement('div');b.className='gi'+(o.disabled?' dis':'')+(o.selected?' sel':'');b.setAttribute('role','option');b.setAttribute('aria-selected',o.selected);b.innerHTML='<i class="ck">'+(o.selected?'✓':'')+'</i><span></span>';b.lastChild.textContent=o.textContent;
+const k=items.length;items.push({o,el:b});if(!o.disabled){b.addEventListener('mousemove',()=>{if(act!==k)mark(k)});b.addEventListener('click',()=>commit(k))}pop.appendChild(b)};
+[...s.children].forEach(c=>{if(c.tagName==='OPTGROUP'){const g=document.createElement('div');g.className='gg';g.textContent=c.label;pop.appendChild(g);[...c.children].forEach(add)}else if(c.tagName==='OPTION')add(c)});
+if(!items.length){pop=null;return}
+pop.style.fontSize=cs.fontSize;pop.style.fontFamily=cs.fontFamily;pop.style.minWidth=(fr.width+12)+'px';pop.style.visibility='hidden';document.body.appendChild(pop);
+const vh=innerHeight-16;if(pop.offsetHeight>vh)pop.style.maxHeight=vh+'px';
+const si=Math.max(0,items.findIndex(x=>x.o.selected)),se=items[si].el,cy=fr.top+fr.height/2;
+let top=cy-(se.offsetTop+se.offsetHeight/2);const H=pop.offsetHeight,W=pop.offsetWidth;
+top=Math.max(8,Math.min(top,innerHeight-8-H));
+if(pop.scrollHeight>pop.clientHeight)pop.scrollTop=Math.max(0,se.offsetTop+se.offsetHeight/2-(cy-top));
+let left=fr.left-6;left=Math.max(8,Math.min(left,innerWidth-8-W));
+pop.style.left=left+'px';pop.style.top=top+'px';pop.style.transformOrigin='24px '+Math.round(cy-top)+'px';pop.style.visibility='';
+act=si;se.classList.add('act');
+document.addEventListener('pointerdown',away,true);addEventListener('resize',close);addEventListener('blur',close);document.addEventListener('scroll',sc,true)}
+document.addEventListener('mousedown',e=>{const s=e.target.closest&&e.target.closest('select');if(!s||s.disabled||s.multiple||s.size>1)return;if(e.button!==0)return;e.preventDefault();if(pop&&sel===s){close(true);return}s.focus({preventScroll:true});open(s)},true);
+document.addEventListener('keydown',e=>{
+if(pop){const n=items.length;const step=d=>{let i=act;do{i+=d}while(i>=0&&i<n&&items[i].o.disabled);if(i>=0&&i<n)mark(i)};
+if(e.key==='ArrowDown'){e.preventDefault();step(1)}else if(e.key==='ArrowUp'){e.preventDefault();step(-1)}
+else if(e.key==='Home'){e.preventDefault();mark(items.findIndex(x=>!x.o.disabled))}
+else if(e.key==='End'){e.preventDefault();for(let i=n-1;i>=0;i--)if(!items[i].o.disabled){mark(i);break}}
+else if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();commit(act)}
+else if(e.key==='Escape'){e.preventDefault();e.stopPropagation();close(true)}
+else if(e.key==='Tab'){close()}
+else if(e.key.length===1&&!e.ctrlKey&&!e.metaKey){const t=Date.now();tq=(t-tt<700?tq:'')+e.key.toLowerCase();tt=t;const k=items.findIndex((x,i)=>!x.o.disabled&&x.o.textContent.trim().toLowerCase().startsWith(tq));if(k>=0)mark(k)}
+return}
+const s=e.target;if(s&&s.tagName==='SELECT'&&!s.disabled&&(e.key==='Enter'||e.key===' '||(e.altKey&&e.key==='ArrowDown'))){e.preventDefault();open(s)}},true);
+}catch(e){console.error('Glasmenü',e)}})();
+
+/* Sheet: Slider anfassen = individuelle Größe; Warnzeichen mit Hinweisfeld */
+try{$('sheetv').addEventListener('input',e=>{if(e.target&&e.target.id==='fs'&&$('auto').checked)$('auto').checked=false},true);
+let tip=null;const hide=()=>{if(tip){tip.remove();tip=null}};
+document.addEventListener('mouseover',e=>{const w=e.target.closest&&e.target.closest('.fw');if(!w||!w.classList.contains('on'))return;hide();tip=document.createElement('div');tip.className='gtip';tip.textContent=w.dataset.tip||'';document.body.appendChild(tip);
+const r=w.getBoundingClientRect(),t=tip.getBoundingClientRect();let x=r.left+r.width/2-t.width/2;x=Math.max(8,Math.min(x,innerWidth-8-t.width));tip.style.left=x+'px';tip.style.top=(r.bottom+8)+'px'});
+document.addEventListener('mouseout',e=>{if(e.target.closest&&e.target.closest('.fw'))hide()});
+document.addEventListener('focusin',e=>{if(e.target.classList&&e.target.classList.contains('fw'))e.target.dispatchEvent(new MouseEvent('mouseover',{bubbles:true}))});
+document.addEventListener('focusout',hide);document.addEventListener('scroll',hide,true)}catch(e){console.error(e)}
+
+/* Sheet und Setlist: Blattgröße per Anfasser und Strg+Scrollen */
+try{const MINZ=.35;
+function pzInit(o){const cur=()=>parseFloat(getComputedStyle(o.wrap).getPropertyValue('--sc'))||1,cl=v=>Math.max(MINZ,Math.min(o.fm(),v));let t0=0;
+const keep=()=>{clearTimeout(t0);t0=setTimeout(()=>{try{const z=o.get();if(z)localStorage.setItem(o.key,String(z));else localStorage.removeItem(o.key)}catch(e){}},300)};
+o.wrap.querySelectorAll(':scope>.pz').forEach(h=>{const sg=h.classList.contains('pzr')?1:-1;
+h.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button!==0)return;e.preventDefault();{const t=Date.now();if(t-(h._t||0)<380){h._t=0;o.set(null);o.re();keep();return}h._t=t}h.setPointerCapture(e.pointerId);
+const x0=e.clientX,w0=o.wrap.getBoundingClientRect().width;let raf=0,v=cur();document.documentElement.classList.add('gl-drag');h.classList.add('on');
+const ap=()=>{raf=0;o.set(v);o.re()},mv=ev=>{v=cl((w0+2*sg*(ev.clientX-x0))/793.7);if(!raf)raf=requestAnimationFrame(ap)},
+up=()=>{h.removeEventListener('pointermove',mv);h.removeEventListener('pointerup',up);h.removeEventListener('pointercancel',up);if(raf)cancelAnimationFrame(raf);o.set(v);o.re();document.documentElement.classList.remove('gl-drag');h.classList.remove('on');keep()};
+h.addEventListener('pointermove',mv);h.addEventListener('pointerup',up);h.addEventListener('pointercancel',up)});
+h.addEventListener('dblclick',()=>{o.set(null);o.re();keep()});
+h.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();const d=(e.key==='ArrowRight'?1:-1)*sg*.04;o.set(cl(cur()+d));o.re();keep()}})});
+o.host.addEventListener('wheel',e=>{if(!(e.ctrlKey||e.metaKey))return;e.preventDefault();o.set(cl(cur()*Math.exp(-e.deltaY*.0025)));o.re();keep()},{passive:false})}
+pzInit({host:$('sheetv'),wrap:$('pgwrap'),key:'cs_sz',get:()=>SZ,set:v=>{SZ=v},re:scale,fm:()=>($('sheetv').clientWidth-2)/793.7});
+pzInit({host:$('setv'),wrap:$('spwrap'),key:'cs_sz2',get:()=>SZ2,set:v=>{SZ2=v},re:sscale,fm:()=>spw()/793.7});
+/* Position der Anfasser-Pille und der festen Reihenfolge: unter der Werkzeugleiste */
+const R=document.documentElement;let rf=0;const pos=()=>{rf=0;const tb=document.querySelector(view==='set'?'#setv>.stool':'#sheetv>.stool');if(!tb||tb.offsetParent===null)return;const bt=Math.max(0,tb.getBoundingClientRect().bottom);R.style.setProperty('--tbb',Math.round(bt)+'px');R.style.setProperty('--pzc',Math.round((bt+innerHeight)/2-22)+'px')},q=()=>{if(!rf)rf=requestAnimationFrame(pos)};
+addEventListener('scroll',q,{passive:true});addEventListener('resize',q);document.addEventListener('click',()=>setTimeout(q,60));
+if(window.ResizeObserver){const ro=new ResizeObserver(q);document.querySelectorAll('#setv>.stool,#sheetv>.stool').forEach(x=>ro.observe(x))}
+window.pzPos=q;q()}catch(e){console.error('Blattzoom',e)}
+
+/* Anfasser-Pille folgt der Maus */
+try{const mv=e=>{const h=e.target.closest&&e.target.closest('.pz,.gl-rs,#rz');if(!h)return;const r=h.getBoundingClientRect();h.style.setProperty('--py',Math.round(Math.max(22,Math.min(r.height-22,e.clientY-r.top)))+'px')};
+document.addEventListener('pointermove',mv,{passive:true});document.addEventListener('pointerover',mv,{passive:true});
+document.addEventListener('focusin',e=>{const h=e.target.closest&&e.target.closest('.pz,.gl-rs,#rz');if(!h)return;const r=h.getBoundingClientRect(),t=Math.max(r.top,0),b=Math.min(r.bottom,innerHeight);h.style.setProperty('--py',Math.round(Math.max(22,Math.min(r.height-22,(t+b)/2-r.top)))+'px')})}catch(e){console.error(e)}
+
+/* Sheet/Setlist: Reiter + Werkzeugleiste bilden die Kopfzeile, darunter scrollen die Flächen in sich (15px Abstand) */
+try{const R=document.documentElement;let np=false;
+const scr=()=>view==='sheet'?$('vscrS'):view==='set'?$('spcol'):view==='gig'?$('vscrG'):null;
+function nop(){np=innerWidth>=900&&(view==='sheet'||view==='set'||view==='gig');R.classList.toggle('nopg',np);
+if(np){if(scrollY)scrollTo(0,0);const sec=$(view==='sheet'?'sheetv':view==='set'?'setv':'gigv');if(sec.getBoundingClientRect().height>=0){const tp=document.querySelector('.tabs'),bm=tp?Math.round(tp.getBoundingClientRect().top):30;R.style.setProperty('--svh',Math.max(320,innerHeight-sec.getBoundingClientRect().top-Math.max(0,bm))+'px')}}
+if(window.sbUpd)window.sbUpd()}
+const _show=show;show=function(v){_show(v);nop();requestAnimationFrame(nop)};
+addEventListener('resize',nop);document.addEventListener('click',()=>setTimeout(nop,80));
+if(window.ResizeObserver){const t=document.querySelector('.top');if(t)new ResizeObserver(nop).observe(t)}
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(nop);nop();
+window.nopOn=()=>np;window.nopScr=scr}catch(e){console.error('Kopfzeile',e)}
+/* eigener Scrollbalken (Sheet, Setlist: Fläche unter der Werkzeugleiste; Gig: Seite) */
+try{const R=document.documentElement,bar=document.createElement('div');bar.id='vsb';bar.setAttribute('aria-hidden','true');bar.innerHTML='<i></i>';document.body.appendChild(bar);const th=bar.firstChild;let hide=0,raf=0,top0=0,len=0,thH=0,mx=0,S=null;
+const tbOf=()=>document.querySelector(view==='gig'?'#gigv>.gbar':'#none');
+const upd=()=>{raf=0;S=window.nopOn&&window.nopOn()?window.nopScr():null;const tb=tbOf(),page=!S&&!!tb&&innerWidth>=900&&tb.offsetParent!==null;R.classList.toggle('nosb',page);R.classList.toggle('vsbon',!!S||page);if(!S&&!page)return;
+let ih,sh,y,bt;if(S){const r=S.getBoundingClientRect();bt=r.top;ih=r.bottom;sh=S.scrollHeight;mx=sh-S.clientHeight;y=S.scrollTop;thH=0;
+if(mx<=2){bar.style.display='none';return}bar.style.display='';top0=r.top+6;len=Math.max(40,r.height-12);bar.style.top=top0+'px';bar.style.height=len+'px';thH=Math.max(36,Math.round(len*S.clientHeight/Math.max(1,sh)))}
+else{bt=Math.max(0,Math.round(tb.getBoundingClientRect().bottom));ih=innerHeight;sh=R.scrollHeight;mx=sh-ih;y=scrollY;if(mx<=2){bar.style.display='none';return}bar.style.display='';top0=bt+6;len=Math.max(40,ih-top0-6);bar.style.top=top0+'px';bar.style.height=len+'px';thH=Math.max(36,Math.round(len*(ih-bt)/Math.max(1,sh-bt)))}
+if(thH>len)thH=len;th.style.height=thH+'px';th.style.top=Math.round((len-thH)*Math.min(1,Math.max(0,y/mx)))+'px'},
+q=()=>{if(!raf)raf=requestAnimationFrame(upd)},flash=()=>{bar.classList.add('on');clearTimeout(hide);hide=setTimeout(()=>bar.classList.remove('on'),1200)};
+document.addEventListener('scroll',e=>{q();const t=e.target;if(t===document||t===S)flash()},{passive:true,capture:true});addEventListener('resize',q);document.addEventListener('click',()=>{setTimeout(q,60);setTimeout(q,400)});
+if(window.ResizeObserver){const ro=new ResizeObserver(q);ro.observe(document.body);['vscrS','spcol','vscrG'].forEach(i=>ro.observe($(i)));document.querySelectorAll('#gigv>.gbar').forEach(x=>ro.observe(x))}
+const jump=y=>{const f=Math.min(1,Math.max(0,(y-top0-thH/2)/Math.max(1,len-thH)));if(S)S.scrollTop=f*mx;else scrollTo(0,f*mx)};
+bar.addEventListener('pointerdown',e=>{e.preventDefault();bar.setPointerCapture(e.pointerId);bar.classList.add('drag');let off=0;if(e.target===th)off=e.clientY-th.getBoundingClientRect().top-thH/2;else jump(e.clientY);
+const mv=ev=>jump(ev.clientY-off),up=()=>{bar.removeEventListener('pointermove',mv);bar.removeEventListener('pointerup',up);bar.removeEventListener('pointercancel',up);bar.classList.remove('drag')};bar.addEventListener('pointermove',mv);bar.addEventListener('pointerup',up);bar.addEventListener('pointercancel',up)});
+window.sbUpd=q;q()}catch(e){console.error('Scrollbalken',e)}
+
+
+
+
 </script>
 </body>
 </html>
